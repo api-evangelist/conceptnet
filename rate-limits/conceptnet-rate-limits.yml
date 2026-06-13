@@ -1,0 +1,38 @@
+aid: conceptnet
+name: ConceptNet Rate Limits
+description: >-
+  ConceptNet enforces rate limits on the public API at api.conceptnet.io to
+  ensure fair use across all consumers. No authentication is required.
+  Rate-limited requests return HTTP 429 responses.
+limits:
+  - name: Hourly Limit
+    description: Maximum number of requests allowed per hour per IP address.
+    requests: 3600
+    period: 1 hour
+    unit: requests per hour
+  - name: Burst Limit
+    description: Short-term burst allowance per minute.
+    requests: 120
+    period: 1 minute
+    unit: requests per minute
+  - name: Sustained Rate Target
+    description: >-
+      Users should target an average of fewer than 1 request per second
+      over any sustained period to remain within acceptable usage.
+    requests: 1
+    period: 1 second
+    unit: requests per second (average target)
+notes:
+  - >-
+    The /related and /relatedness endpoints count as 2 requests toward the
+    rate limit quota because they perform additional computation using
+    ConceptNet Numberbatch word embeddings.
+  - >-
+    For high-volume use cases, users are encouraged to self-host ConceptNet
+    using the open-source codebase and downloaded data files.
+  - >-
+    Rate limits are enforced per IP address. No API keys are issued or
+    required to access the public API.
+  - >-
+    Exceeding rate limits returns HTTP 429 Too Many Requests. Users should
+    implement exponential backoff when retrying after rate-limit responses.

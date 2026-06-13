@@ -1,0 +1,59 @@
+aid: conceptnet
+name: ConceptNet FinOps
+description: >-
+  ConceptNet is a free, open-source knowledge graph with no paid API tiers.
+  Cost management for ConceptNet usage centers on staying within public API
+  rate limits or planning the infrastructure required for a self-hosted
+  deployment.
+model: free-open-source
+costDrivers:
+  - name: Public API Usage
+    description: >-
+      The hosted public API at api.conceptnet.io has no monetary cost.
+      The primary cost driver is staying within the 3,600 requests/hour
+      rate limit. /related and /relatedness endpoints count double against
+      the quota.
+    cost: $0
+    unit: per request
+  - name: Self-Hosted Infrastructure
+    description: >-
+      Running a local ConceptNet instance requires significant hardware.
+      Minimum 30 GB RAM is needed to load the database. Additional storage
+      is required for the full data download (~30 GB compressed).
+    cost: variable
+    unit: cloud or on-premise compute
+optimizationStrategies:
+  - name: Cache Responses
+    description: >-
+      Cache concept lookups and query results locally. ConceptNet's
+      knowledge graph is relatively static, making aggressive caching
+      safe and effective for reducing repeated API calls.
+  - name: Batch Queries Efficiently
+    description: >-
+      Use the /query endpoint with combined parameters (node, rel, start,
+      end) to fetch all relevant edges in a single request rather than
+      chaining multiple node lookups.
+  - name: Avoid Double-Counting Endpoints
+    description: >-
+      The /related and /relatedness endpoints each consume 2 rate-limit
+      credits. Use node lookups and local edge traversal when possible
+      to preserve quota for relatedness computations.
+  - name: Self-Host for High Volume
+    description: >-
+      For applications requiring more than 3,600 requests/hour, download
+      the ConceptNet data dump and run a local instance to eliminate
+      rate limits entirely.
+  - name: Download Data Dumps
+    description: >-
+      For batch processing or offline analysis, download ConceptNet data
+      files from the downloads page rather than making thousands of API
+      calls. Data is available in CSV and JSON-LD formats.
+dataDownloads:
+  - name: ConceptNet CSV
+    description: Tab-separated edges file for bulk processing
+    url: https://github.com/commonsense/conceptnet5/wiki/Downloads
+    cost: $0
+  - name: ConceptNet JSON-LD
+    description: Full JSON-LD dataset for linked data applications
+    url: https://github.com/commonsense/conceptnet5/wiki/Downloads
+    cost: $0

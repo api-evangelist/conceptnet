@@ -1,0 +1,38 @@
+aid: conceptnet
+name: ConceptNet Plans & Pricing
+description: >-
+  ConceptNet is free and open-source. There are no paid tiers, API keys, or
+  subscription plans. The public REST API at api.conceptnet.io is available
+  to anyone at no cost under the CC BY-SA 4.0 license. Users who need higher
+  throughput or private deployments can self-host the full ConceptNet database
+  using the open-source codebase.
+plans:
+  - name: Free Public API
+    description: >-
+      Unlimited, unauthenticated access to the ConceptNet REST API hosted at
+      api.conceptnet.io. No registration or API key is required. Rate limits
+      apply to ensure fair use across all users.
+    price: 0
+    currency: USD
+    unit: per request
+    rateLimit: 3600 requests per hour
+    features:
+      - All endpoints (node lookup, query, related, relatedness, URI)
+      - JSON-LD response format
+      - 100+ language support
+      - No authentication required
+      - Open data under CC BY-SA 4.0
+  - name: Self-Hosted
+    description: >-
+      Download and run ConceptNet locally using the open-source Python
+      codebase. Requires a Unix environment, Python 3.5+, and 30 GB RAM.
+      No rate limits apply to local instances.
+    price: 0
+    currency: USD
+    unit: self-managed
+    features:
+      - No rate limits
+      - Full database access
+      - Local Python API (AssertionFinder)
+      - Custom builds possible
+      - Requires significant hardware resources

@@ -1,0 +1,182 @@
+aid: conceptnet
+name: ConceptNet
+description: >-
+  ConceptNet is a freely available multilingual knowledge graph that gives
+  computers access to common-sense knowledge. It represents over 13 million
+  links between concepts across 100+ languages, drawing from crowd-sourced
+  resources (Open Mind Common Sense, Wiktionary), expert-created resources
+  (WordNet, JMDict), and games with a purpose (Verbosity, nadya.jp). The
+  public REST API provides JSON-LD responses and receives over 50,000 daily
+  hits. ConceptNet also powers Numberbatch, a set of multilingual word
+  embeddings aligned across languages that outperform word2vec, GloVe, and
+  fastText on standard benchmarks.
+url: https://conceptnet.io
+image: https://conceptnet.io/img/conceptnet-logo.png
+specificationVersion: '0.19'
+created: '2026-06-13'
+modified: '2026-06-13'
+x-source: manual
+x-category: Knowledge Graphs
+tags:
+  - Knowledge Graph
+  - NLP
+  - Semantic Web
+  - Common Sense
+  - Multilingual
+  - Word Embeddings
+  - Linked Data
+  - Open Data
+apis:
+  - name: ConceptNet REST API
+    description: >-
+      The ConceptNet REST API exposes the full ConceptNet 5 knowledge graph
+      via JSON-LD endpoints. Consumers can look up concept nodes by language
+      and term, query edges by relation type, retrieve semantically related
+      terms ranked by Numberbatch embedding similarity, compute pairwise
+      relatedness scores between concepts, and normalize natural-language
+      text into canonical ConceptNet URIs. No authentication or API key is
+      required. Rate limits of 3,600 requests/hour and 120 requests/minute
+      apply. The /related and /relatedness endpoints each count as 2 requests
+      against the quota.
+    humanURL: https://github.com/commonsense/conceptnet5/wiki/API
+    baseURL: https://api.conceptnet.io
+    tags:
+      - Knowledge Graph
+      - NLP
+      - Semantic Relations
+      - Multilingual
+      - Common Sense
+    properties:
+      - type: Documentation
+        url: https://github.com/commonsense/conceptnet5/wiki/API
+      - type: GettingStarted
+        url: https://github.com/commonsense/conceptnet5/wiki
+      - type: Downloads
+        url: https://github.com/commonsense/conceptnet5/wiki/Downloads
+common:
+  - type: Website
+    url: https://conceptnet.io
+  - type: Documentation
+    url: https://github.com/commonsense/conceptnet5/wiki/API
+  - type: GettingStarted
+    url: https://github.com/commonsense/conceptnet5/wiki
+  - type: GitHubOrganization
+    url: https://github.com/commonsense
+  - type: GitHubRepository
+    url: https://github.com/commonsense/conceptnet5
+  - type: License
+    url: https://creativecommons.org/licenses/by-sa/4.0/
+  - type: Downloads
+    url: https://github.com/commonsense/conceptnet5/wiki/Downloads
+  - type: FAQ
+    url: https://github.com/commonsense/conceptnet5/wiki/FAQ
+  - type: Support
+    url: https://groups.google.com/g/conceptnet-users
+  - type: Plans
+    url: plans/conceptnet-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/conceptnet-rate-limits.yml
+  - type: FinOps
+    url: finops/conceptnet-finops.yml
+features:
+  - name: Multilingual Knowledge Graph
+    description: >-
+      Covers concepts in 100+ languages with cross-language semantic links.
+      Each concept node is identified by a URI such as /c/en/dog or /c/fr/chien,
+      enabling cross-lingual knowledge transfer and multilingual NLP pipelines.
+  - name: Semantic Relations
+    description: >-
+      Edges encode typed relations including IsA, UsedFor, CapableOf, AtLocation,
+      Causes, HasProperty, PartOf, SimilarTo, Antonym, RelatedTo, and many more.
+      Each edge carries a weight representing confidence from the source data.
+  - name: JSON-LD Linked Data API
+    description: >-
+      All API responses use the JSON-LD format with @context, @id, and @type
+      annotations, enabling seamless integration with RDF toolchains and
+      semantic web applications.
+  - name: Related Terms (Numberbatch Embeddings)
+    description: >-
+      The /related endpoint returns ranked semantically related concepts
+      using ConceptNet Numberbatch word vectors — cross-lingual embeddings
+      designed to avoid harmful stereotypes and outperform word2vec, GloVe,
+      and fastText on analogy and similarity benchmarks.
+  - name: Pairwise Relatedness Score
+    description: >-
+      The /relatedness endpoint returns a similarity score between 0 and 1
+      for any two concept URIs, enabling quick semantic similarity checks
+      without building a local embedding model.
+  - name: Complex Edge Queries
+    description: >-
+      The /query endpoint accepts combinations of start, end, rel, node,
+      other, and sources parameters to slice the knowledge graph by
+      subject, object, relation type, or data source simultaneously.
+  - name: URI Normalization
+    description: >-
+      The /uri endpoint converts raw natural-language text in any supported
+      language into a canonical ConceptNet URI, handling tokenization,
+      lowercasing, and language-specific normalization automatically.
+  - name: No Authentication Required
+    description: >-
+      The public API requires no registration, API key, or OAuth token.
+      Any HTTP client can query api.conceptnet.io directly.
+useCases:
+  - name: Semantic Similarity in NLP Pipelines
+    description: >-
+      Use /relatedness or /related to score or rank term similarity in
+      question answering, text classification, and entity disambiguation
+      tasks without training a custom embedding model.
+  - name: Knowledge-Graph-Augmented AI
+    description: >-
+      Enrich LLM prompts or retrieval pipelines with structured commonsense
+      facts by querying /c/{language}/{term} for edges describing causes,
+      properties, and typical locations of a concept.
+  - name: Cross-Language Information Retrieval
+    description: >-
+      Leverage ConceptNet's multilingual graph to expand a query in one
+      language to synonymous concepts in another, supporting multilingual
+      search and cross-lingual document clustering.
+  - name: Educational Vocabulary Tools
+    description: >-
+      Build vocabulary-learning apps that surface semantic neighbors,
+      antonyms, and example sentences for any word in dozens of languages
+      using the IsA, SimilarTo, and Antonym relation edges.
+  - name: Commonsense Reasoning Datasets
+    description: >-
+      Use ConceptNet as a gold-standard knowledge source for generating or
+      evaluating commonsense reasoning benchmarks and training data for
+      language models.
+  - name: Chatbot Knowledge Enrichment
+    description: >-
+      Query ConceptNet for UsedFor, CapableOf, and AtLocation edges to
+      give chatbots and virtual assistants grounded commonsense knowledge
+      about everyday objects and actions.
+integrations:
+  - name: Python (conceptnet5)
+    description: >-
+      The open-source Python codebase includes a local AssertionFinder API
+      for querying a self-hosted ConceptNet database without HTTP overhead.
+    url: https://github.com/commonsense/conceptnet5
+  - name: ConceptNet Numberbatch
+    description: >-
+      Pre-trained multilingual word embedding vectors (h5 and text formats)
+      that can be loaded directly into NumPy, PyTorch, or TensorFlow for
+      offline semantic similarity computation.
+    url: https://github.com/commonsense/conceptnet-numberbatch
+  - name: Linked Data / RDF
+    description: >-
+      JSON-LD responses integrate directly with JSON-LD processors, RDF
+      triple stores (Apache Jena, Virtuoso), and SPARQL query engines.
+solutions:
+  - name: Zero-Cost Semantic Enrichment
+    description: >-
+      Query /related for any concept in an NLP pipeline at zero cost and
+      without authentication, adding knowledge-graph context to otherwise
+      purely statistical models.
+  - name: Self-Hosted High-Volume Deployment
+    description: >-
+      For applications exceeding 3,600 requests/hour, download the full
+      ConceptNet data dump and run a local PostgreSQL-backed instance using
+      the open-source codebase, eliminating rate limits entirely.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
