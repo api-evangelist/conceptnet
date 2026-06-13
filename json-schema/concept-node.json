@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.conceptnet.io/schema/concept-node.json",
+  "title": "ConceptNet Concept Node",
+  "description": "A JSON-LD node object representing a ConceptNet concept, returned by /c/{language}/{term}. Contains all edges (assertions) connecting this concept to others, plus JSON-LD context and pagination metadata.",
+  "type": "object",
+  "required": ["@context", "@id", "edges"],
+  "properties": {
+    "@context": {
+      "type": "array",
+      "description": "JSON-LD context URLs providing term definitions",
+      "items": {
+        "type": "string"
+      },
+      "example": ["http://api.conceptnet.io/ld/conceptnet5.7/context.ld.json"]
+    },
+    "@id": {
+      "type": "string",
+      "description": "ConceptNet URI of the concept",
+      "example": "/c/en/dog"
+    },
+    "edges": {
+      "type": "array",
+      "description": "Paginated list of assertions (edges) involving this concept",
+      "items": {
+        "$ref": "edge.json"
+      }
+    },
+    "view": {
+      "$ref": "#/$defs/pagination"
+    }
+  },
+  "$defs": {
+    "pagination": {
+      "type": "object",
+      "description": "Pagination metadata for navigating large result sets",
+      "properties": {
+        "@id": {
+          "type": "string",
+          "description": "URI of the current page"
+        },
+        "paginatedProperty": {
+          "type": "string",
+          "description": "Property name holding paginated items",
+          "example": "edges"
+        },
+        "firstPage": {
+          "type": "string",
+          "description": "URI of the first result page"
+        },
+        "nextPage": {
+          "type": "string",
+          "description": "URI of the next result page (absent on last page)"
+        },
+        "previousPage": {
+          "type": "string",
+          "description": "URI of the previous result page (absent on first page)"
+        },
+        "comment": {
+          "type": "string",
+          "description": "Human-readable pagination summary",
+          "example": "Results 1-20 of 143"
+        }
+      }
+    }
+  }
+}

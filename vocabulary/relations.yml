@@ -1,0 +1,205 @@
+# ConceptNet Relation Vocabulary
+# Source: https://github.com/commonsense/conceptnet5/wiki/Relations
+# All relations are defined in the ConceptNet relation ontology at /r/{relation}
+
+relations:
+  - id: /r/RelatedTo
+    label: RelatedTo
+    description: >-
+      A catch-all relation for concepts that are related in some way not
+      covered by a more specific relation. Often derived from Wiktionary
+      and other general sources.
+    symmetric: true
+
+  - id: /r/IsA
+    label: IsA
+    description: >-
+      A is a type of B, or A is an instance of B. Used for hypernymy and
+      category membership (e.g. a dog IsA animal).
+    symmetric: false
+
+  - id: /r/PartOf
+    label: PartOf
+    description: >-
+      A is a part of B (meronymy). E.g. a wheel PartOf a car.
+    symmetric: false
+
+  - id: /r/HasA
+    label: HasA
+    description: >-
+      A has B as a part or property. The converse of PartOf. E.g. a car HasA wheel.
+    symmetric: false
+
+  - id: /r/UsedFor
+    label: UsedFor
+    description: >-
+      A is used for B (purpose/function). E.g. a knife UsedFor cutting food.
+    symmetric: false
+
+  - id: /r/CapableOf
+    label: CapableOf
+    description: >-
+      A is capable of doing B (agency/ability). E.g. a bird CapableOf flying.
+    symmetric: false
+
+  - id: /r/AtLocation
+    label: AtLocation
+    description: >-
+      A is typically found at location B. E.g. a wolf AtLocation a forest.
+    symmetric: false
+
+  - id: /r/Causes
+    label: Causes
+    description: >-
+      A causes B to happen. E.g. friction Causes heat.
+    symmetric: false
+
+  - id: /r/HasSubevent
+    label: HasSubevent
+    description: >-
+      B is a subevent of the event A; B happens during A.
+    symmetric: false
+
+  - id: /r/HasFirstSubevent
+    label: HasFirstSubevent
+    description: >-
+      The first subevent of A is B.
+    symmetric: false
+
+  - id: /r/HasLastSubevent
+    label: HasLastSubevent
+    description: >-
+      The last subevent of A is B.
+    symmetric: false
+
+  - id: /r/HasPrerequisite
+    label: HasPrerequisite
+    description: >-
+      To do A, B must happen first. E.g. to read HasPrerequisite literacy.
+    symmetric: false
+
+  - id: /r/HasProperty
+    label: HasProperty
+    description: >-
+      A has the property B. E.g. ice HasProperty cold.
+    symmetric: false
+
+  - id: /r/MotivatedByGoal
+    label: MotivatedByGoal
+    description: >-
+      The motivation for doing A is the goal B.
+    symmetric: false
+
+  - id: /r/ObstructedBy
+    label: ObstructedBy
+    description: >-
+      A is obstructed or prevented by B.
+    symmetric: false
+
+  - id: /r/Desires
+    label: Desires
+    description: >-
+      A (a person or agent) desires B (an outcome or state).
+    symmetric: false
+
+  - id: /r/CreatedBy
+    label: CreatedBy
+    description: >-
+      A is created by the action or process B.
+    symmetric: false
+
+  - id: /r/Synonym
+    label: Synonym
+    description: >-
+      A and B have the same or nearly the same meaning in the same language.
+    symmetric: true
+
+  - id: /r/Antonym
+    label: Antonym
+    description: >-
+      A and B have opposite meanings. E.g. hot Antonym cold.
+    symmetric: true
+
+  - id: /r/DistinctFrom
+    label: DistinctFrom
+    description: >-
+      A and B are distinct and mutually exclusive members of the same category.
+    symmetric: true
+
+  - id: /r/DerivedFrom
+    label: DerivedFrom
+    description: >-
+      A is derived from B etymologically or morphologically.
+    symmetric: false
+
+  - id: /r/SymbolOf
+    label: SymbolOf
+    description: >-
+      A symbolically represents B.
+    symmetric: false
+
+  - id: /r/DefinedAs
+    label: DefinedAs
+    description: >-
+      A is defined as B (dictionary-style definition).
+    symmetric: false
+
+  - id: /r/MannerOf
+    label: MannerOf
+    description: >-
+      A is a manner or way of doing B. E.g. sprinting MannerOf running.
+    symmetric: false
+
+  - id: /r/LocatedNear
+    label: LocatedNear
+    description: >-
+      A and B are typically found near each other geographically or spatially.
+    symmetric: true
+
+  - id: /r/HasContext
+    label: HasContext
+    description: >-
+      A is used in the context or domain of B (e.g. register, field).
+    symmetric: false
+
+  - id: /r/SimilarTo
+    label: SimilarTo
+    description: >-
+      A is similar to B in some meaningful way (broader than Synonym).
+    symmetric: true
+
+  - id: /r/EtymologicallyRelatedTo
+    label: EtymologicallyRelatedTo
+    description: >-
+      A and B share an etymological root or are cognates.
+    symmetric: true
+
+  - id: /r/EtymologicallyDerivedFrom
+    label: EtymologicallyDerivedFrom
+    description: >-
+      A is etymologically derived from B (directional cognate relation).
+    symmetric: false
+
+  - id: /r/CausesDesire
+    label: CausesDesire
+    description: >-
+      Experiencing A causes a person to desire B.
+    symmetric: false
+
+  - id: /r/MadeOf
+    label: MadeOf
+    description: >-
+      A is made of material B. E.g. a chair MadeOf wood.
+    symmetric: false
+
+  - id: /r/ReceivesAction
+    label: ReceivesAction
+    description: >-
+      B is an action typically performed on A. E.g. food ReceivesAction eating.
+    symmetric: false
+
+  - id: /r/ExternalURL
+    label: ExternalURL
+    description: >-
+      A has an external URL B that provides additional information or context.
+    symmetric: false

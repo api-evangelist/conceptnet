@@ -1,0 +1,24 @@
+{
+  "title": "Normalize text to a ConceptNet URI: /uri?language=en&text=french+toast",
+  "description": "Example of using the /uri endpoint to convert the phrase 'french toast' into a canonical ConceptNet URI. Useful for constructing URIs to pass to other endpoints without having to guess the exact normalization rules.",
+  "request": {
+    "method": "GET",
+    "url": "https://api.conceptnet.io/uri?language=en&text=french+toast",
+    "headers": {
+      "Accept": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/ld+json"
+    },
+    "body": {
+      "@context": [
+        "http://api.conceptnet.io/ld/conceptnet5.7/context.ld.json"
+      ],
+      "@id": "/uri?language=en&text=french+toast",
+      "uri": "/c/en/french_toast"
+    }
+  }
+}

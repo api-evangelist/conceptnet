@@ -1,0 +1,26 @@
+{
+  "@context": "http://api.conceptnet.io/ld/conceptnet5.7/context.ld.json",
+  "@type": "Edge",
+  "description": "JSON-LD frame for extracting ConceptNet edge assertions from API responses. Apply this frame with a JSON-LD processor (e.g. jsonld.js or pyld) to normalize edge objects into a consistent shape.",
+  "start": {
+    "@type": "ConceptNode",
+    "label": {},
+    "language": {},
+    "term": {}
+  },
+  "end": {
+    "@type": "ConceptNode",
+    "label": {},
+    "language": {},
+    "term": {}
+  },
+  "rel": {
+    "@type": "Relation",
+    "label": {}
+  },
+  "surfaceText": {},
+  "weight": {},
+  "license": {},
+  "dataset": {},
+  "sources": {}
+}

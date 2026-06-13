@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.conceptnet.io/schema/edge.json",
+  "title": "ConceptNet Edge",
+  "description": "A single ConceptNet assertion linking two concept nodes via a typed relation. Each edge has a weight representing confidence, a license, a dataset provenance URI, and an array of source attributions.",
+  "type": "object",
+  "required": ["@id", "start", "end", "rel", "weight"],
+  "properties": {
+    "@id": {
+      "type": "string",
+      "description": "Unique URI identifier for this edge in the form /a/[/{rel}/,{start},{end}/]",
+      "example": "/a/[/r/IsA/,/c/en/dog/,/c/en/animal/]"
+    },
+    "start": {
+      "$ref": "#/$defs/conceptRef",
+      "description": "Subject (start) concept of the assertion"
+    },
+    "end": {
+      "$ref": "#/$defs/conceptRef",
+      "description": "Object (end) concept of the assertion"
+    },
+    "rel": {
+      "$ref": "#/$defs/relationRef",
+      "description": "Relation type connecting start and end"
+    },
+    "surfaceText": {
+      "type": ["string", "null"],
+      "description": "Natural-language sentence from which this assertion was derived",
+      "example": "[[A dog]] is a [[animal]]."
+    },
+    "weight": {
+      "type": "number",
+      "description": "Confidence weight of the assertion. Higher values indicate stronger evidence.",
+      "minimum": 0,
+      "example": 3.46
+    },
+    "license": {
+      "type": "string",
+      "description": "Creative Commons license identifier",
+      "example": "cc:by/4.0"
+    },
+    "dataset": {
+      "type": "string",
+      "description": "Dataset provenance URI",
+      "example": "/d/verbosity"
+    },
+    "sources": {
+      "type": "array",
+      "description": "Array of source attribution references",
+      "items": {
+        "$ref": "#/$defs/sourceRef"
+      }
+    }
+  },
+  "$defs": {
+    "conceptRef": {
+      "type": "object",
+      "description": "Reference to a ConceptNet concept node",
+      "required": ["@id"],
+      "properties": {
+        "@id": {
+          "type": "string",
+          "description": "ConceptNet URI",
+          "example": "/c/en/dog"
+        },
+        "label": {
+          "type": "string",
+          "description": "Human-readable label for the concept",
+          "example": "dog"
+        },
+        "language": {
+          "type": "string",
+          "description": "BCP-47 language code",
+          "example": "en"
+        },
+        "term": {
+          "type": "string",
+          "description": "ConceptNet concept URI (same as @id)",
+          "example": "/c/en/dog"
+        },
+        "sense_label": {
+          "type": "string",
+          "description": "Part-of-speech or sense label",
+          "example": "n"
+        }
+      }
+    },
+    "relationRef": {
+      "type": "object",
+      "description": "Reference to a ConceptNet relation type",
+      "required": ["@id"],
+      "properties": {
+        "@id": {
+          "type": "string",
+          "description": "Relation URI",
+          "example": "/r/IsA"
+        },
+        "label": {
+          "type": "string",
+          "description": "Human-readable relation name",
+          "example": "IsA"
+        }
+      }
+    },
+    "sourceRef": {
+      "type": "object",
+      "description": "Reference to a ConceptNet data source",
+      "required": ["@id"],
+      "properties": {
+        "@id": {
+          "type": "string",
+          "description": "Source URI",
+          "example": "/s/resource/verbosity"
+        }
+      }
+    }
+  }
+}

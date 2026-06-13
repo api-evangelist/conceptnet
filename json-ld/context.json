@@ -1,0 +1,46 @@
+{
+  "@context": {
+    "@vocab": "http://api.conceptnet.io/ld/conceptnet5.7/",
+    "conceptnet": "http://conceptnet.io/",
+    "cn": "http://api.conceptnet.io/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "cc": "http://creativecommons.org/ns#",
+
+    "edge": {"@id": "cn:a/", "@type": "@id"},
+    "start": {"@id": "conceptnet:start", "@type": "@id"},
+    "end": {"@id": "conceptnet:end", "@type": "@id"},
+    "rel": {"@id": "conceptnet:rel", "@type": "@id"},
+    "weight": {"@id": "conceptnet:weight", "@type": "xsd:float"},
+    "sources": {"@id": "conceptnet:sources", "@type": "@id", "@container": "@set"},
+    "surfaceText": {"@id": "conceptnet:surfaceText"},
+    "dataset": {"@id": "conceptnet:dataset", "@type": "@id"},
+    "license": {"@id": "dc:license", "@type": "@id"},
+
+    "label": {"@id": "rdfs:label"},
+    "language": {"@id": "dcterms:language"},
+    "term": {"@id": "conceptnet:term", "@type": "@id"},
+    "sense_label": {"@id": "conceptnet:sense_label"},
+
+    "edges": {"@id": "cn:edges", "@container": "@set"},
+    "related": {"@id": "cn:related", "@container": "@list"},
+
+    "view": {"@id": "cn:view", "@type": "@id"},
+    "paginatedProperty": {"@id": "cn:paginatedProperty"},
+    "firstPage": {"@id": "cn:firstPage", "@type": "@id"},
+    "nextPage": {"@id": "cn:nextPage", "@type": "@id"},
+    "previousPage": {"@id": "cn:previousPage", "@type": "@id"},
+    "comment": {"@id": "rdfs:comment"},
+
+    "uri": {"@id": "conceptnet:uri", "@type": "@id"},
+    "value": {"@id": "conceptnet:value", "@type": "xsd:float"},
+    "node1": {"@id": "conceptnet:node1", "@type": "@id"},
+    "node2": {"@id": "conceptnet:node2", "@type": "@id"}
+  },
+  "x-note": "This is a reconstructed JSON-LD context based on the ConceptNet 5.7 API response format. The authoritative context is served at http://api.conceptnet.io/ld/conceptnet5.7/context.ld.json."
+}

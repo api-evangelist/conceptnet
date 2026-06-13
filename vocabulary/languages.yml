@@ -1,0 +1,134 @@
+# ConceptNet Supported Languages (selected major languages)
+# Full list: https://github.com/commonsense/conceptnet5/wiki/Languages
+# Language codes follow BCP-47 / ISO 639-1 conventions
+
+languages:
+  - code: en
+    name: English
+    uri_prefix: /c/en
+
+  - code: fr
+    name: French
+    uri_prefix: /c/fr
+
+  - code: de
+    name: German
+    uri_prefix: /c/de
+
+  - code: es
+    name: Spanish
+    uri_prefix: /c/es
+
+  - code: pt
+    name: Portuguese
+    uri_prefix: /c/pt
+
+  - code: it
+    name: Italian
+    uri_prefix: /c/it
+
+  - code: nl
+    name: Dutch
+    uri_prefix: /c/nl
+
+  - code: ru
+    name: Russian
+    uri_prefix: /c/ru
+
+  - code: zh
+    name: Chinese (Simplified)
+    uri_prefix: /c/zh
+
+  - code: ja
+    name: Japanese
+    uri_prefix: /c/ja
+
+  - code: ko
+    name: Korean
+    uri_prefix: /c/ko
+
+  - code: ar
+    name: Arabic
+    uri_prefix: /c/ar
+
+  - code: pl
+    name: Polish
+    uri_prefix: /c/pl
+
+  - code: sv
+    name: Swedish
+    uri_prefix: /c/sv
+
+  - code: fi
+    name: Finnish
+    uri_prefix: /c/fi
+
+  - code: da
+    name: Danish
+    uri_prefix: /c/da
+
+  - code: no
+    name: Norwegian
+    uri_prefix: /c/no
+
+  - code: tr
+    name: Turkish
+    uri_prefix: /c/tr
+
+  - code: he
+    name: Hebrew
+    uri_prefix: /c/he
+
+  - code: fa
+    name: Persian
+    uri_prefix: /c/fa
+
+  - code: vi
+    name: Vietnamese
+    uri_prefix: /c/vi
+
+  - code: id
+    name: Indonesian
+    uri_prefix: /c/id
+
+  - code: ms
+    name: Malay
+    uri_prefix: /c/ms
+
+  - code: th
+    name: Thai
+    uri_prefix: /c/th
+
+  - code: uk
+    name: Ukrainian
+    uri_prefix: /c/uk
+
+  - code: cs
+    name: Czech
+    uri_prefix: /c/cs
+
+  - code: hu
+    name: Hungarian
+    uri_prefix: /c/hu
+
+  - code: ro
+    name: Romanian
+    uri_prefix: /c/ro
+
+  - code: el
+    name: Greek
+    uri_prefix: /c/el
+
+  - code: bg
+    name: Bulgarian
+    uri_prefix: /c/bg
+
+  - code: la
+    name: Latin
+    uri_prefix: /c/la
+
+notes: >-
+  ConceptNet covers 100+ languages in total. The list above covers the
+  languages with the largest number of concept nodes. Each language URI
+  prefix can be used with the filter parameter in /related to restrict
+  results to that language.

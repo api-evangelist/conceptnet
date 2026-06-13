@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.conceptnet.io/schema/relatedness.json",
+  "title": "ConceptNet Relatedness Result",
+  "description": "Response from /relatedness giving a pairwise semantic similarity score between two ConceptNet concept URIs, computed from Numberbatch word vector cosine similarity.",
+  "type": "object",
+  "required": ["@id", "value", "node1", "node2"],
+  "properties": {
+    "@id": {
+      "type": "string",
+      "description": "URI of this relatedness result",
+      "example": "/relatedness?node1=/c/en/dog&node2=/c/en/cat"
+    },
+    "value": {
+      "type": "number",
+      "description": "Semantic relatedness score between 0.0 (unrelated) and 1.0 (identical).",
+      "minimum": 0,
+      "maximum": 1,
+      "example": 0.849
+    },
+    "node1": {
+      "$ref": "#/$defs/conceptRef"
+    },
+    "node2": {
+      "$ref": "#/$defs/conceptRef"
+    }
+  },
+  "$defs": {
+    "conceptRef": {
+      "type": "object",
+      "required": ["@id"],
+      "properties": {
+        "@id": {
+          "type": "string",
+          "description": "ConceptNet URI",
+          "example": "/c/en/dog"
+        },
+        "label": {
+          "type": "string",
+          "example": "dog"
+        },
+        "language": {
+          "type": "string",
+          "example": "en"
+        }
+      }
+    }
+  }
+}

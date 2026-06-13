@@ -1,0 +1,163 @@
+{
+  "title": "Look up a concept node: /c/en/dog",
+  "description": "Example request and response for retrieving the ConceptNet node for the English concept 'dog'. The response includes paginated edges showing semantic relations such as IsA, HasA, AtLocation, and CapableOf.",
+  "request": {
+    "method": "GET",
+    "url": "https://api.conceptnet.io/c/en/dog?limit=5",
+    "headers": {
+      "Accept": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/ld+json"
+    },
+    "body": {
+      "@context": [
+        "http://api.conceptnet.io/ld/conceptnet5.7/context.ld.json"
+      ],
+      "@id": "/c/en/dog",
+      "edges": [
+        {
+          "@id": "/a/[/r/IsA/,/c/en/dog/,/c/en/animal/]",
+          "start": {
+            "@id": "/c/en/dog",
+            "label": "dog",
+            "language": "en",
+            "term": "/c/en/dog"
+          },
+          "end": {
+            "@id": "/c/en/animal",
+            "label": "animal",
+            "language": "en",
+            "term": "/c/en/animal"
+          },
+          "rel": {
+            "@id": "/r/IsA",
+            "label": "IsA"
+          },
+          "surfaceText": "[[A dog]] is a [[animal]].",
+          "weight": 5.0,
+          "license": "cc:by/4.0",
+          "dataset": "/d/conceptnet/en",
+          "sources": [
+            {"@id": "/s/resource/conceptnet/4/en"},
+            {"@id": "/s/activity/omcs/vote"}
+          ]
+        },
+        {
+          "@id": "/a/[/r/HasA/,/c/en/dog/,/c/en/paw/]",
+          "start": {
+            "@id": "/c/en/dog",
+            "label": "dog",
+            "language": "en",
+            "term": "/c/en/dog"
+          },
+          "end": {
+            "@id": "/c/en/paw",
+            "label": "paw",
+            "language": "en",
+            "term": "/c/en/paw"
+          },
+          "rel": {
+            "@id": "/r/HasA",
+            "label": "HasA"
+          },
+          "surfaceText": "[[A dog]] has [[paws]].",
+          "weight": 4.0,
+          "license": "cc:by/4.0",
+          "dataset": "/d/conceptnet/en",
+          "sources": [
+            {"@id": "/s/resource/conceptnet/4/en"}
+          ]
+        },
+        {
+          "@id": "/a/[/r/CapableOf/,/c/en/dog/,/c/en/bark/]",
+          "start": {
+            "@id": "/c/en/dog",
+            "label": "dog",
+            "language": "en",
+            "term": "/c/en/dog"
+          },
+          "end": {
+            "@id": "/c/en/bark",
+            "label": "bark",
+            "language": "en",
+            "term": "/c/en/bark"
+          },
+          "rel": {
+            "@id": "/r/CapableOf",
+            "label": "CapableOf"
+          },
+          "surfaceText": "[[A dog]] can [[bark]].",
+          "weight": 3.46,
+          "license": "cc:by/4.0",
+          "dataset": "/d/verbosity",
+          "sources": [
+            {"@id": "/s/resource/verbosity"}
+          ]
+        },
+        {
+          "@id": "/a/[/r/AtLocation/,/c/en/dog/,/c/en/kennel/]",
+          "start": {
+            "@id": "/c/en/dog",
+            "label": "dog",
+            "language": "en",
+            "term": "/c/en/dog"
+          },
+          "end": {
+            "@id": "/c/en/kennel",
+            "label": "kennel",
+            "language": "en",
+            "term": "/c/en/kennel"
+          },
+          "rel": {
+            "@id": "/r/AtLocation",
+            "label": "AtLocation"
+          },
+          "surfaceText": "[[A dog]] can be found in a [[kennel]].",
+          "weight": 2.0,
+          "license": "cc:by/4.0",
+          "dataset": "/d/conceptnet/en",
+          "sources": [
+            {"@id": "/s/resource/conceptnet/4/en"}
+          ]
+        },
+        {
+          "@id": "/a/[/r/RelatedTo/,/c/en/dog/,/c/en/cat/]",
+          "start": {
+            "@id": "/c/en/dog",
+            "label": "dog",
+            "language": "en",
+            "term": "/c/en/dog"
+          },
+          "end": {
+            "@id": "/c/en/cat",
+            "label": "cat",
+            "language": "en",
+            "term": "/c/en/cat"
+          },
+          "rel": {
+            "@id": "/r/RelatedTo",
+            "label": "RelatedTo"
+          },
+          "surfaceText": null,
+          "weight": 1.0,
+          "license": "cc:by-sa/4.0",
+          "dataset": "/d/wiktionary/en",
+          "sources": [
+            {"@id": "/s/resource/wiktionary/en"}
+          ]
+        }
+      ],
+      "view": {
+        "@id": "/c/en/dog?offset=0&limit=5",
+        "paginatedProperty": "edges",
+        "firstPage": "/c/en/dog?offset=0&limit=5",
+        "nextPage": "/c/en/dog?offset=5&limit=5",
+        "comment": "Results 1-5 of 147"
+      }
+    }
+  }
+}

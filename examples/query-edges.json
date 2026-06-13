@@ -1,0 +1,84 @@
+{
+  "title": "Query edges by start and relation: /query?start=/c/en/music&rel=/r/UsedFor",
+  "description": "Example of using the /query endpoint to find all ConceptNet edges where music is the subject (start) and the relation is UsedFor. Returns edges describing what music is used for.",
+  "request": {
+    "method": "GET",
+    "url": "https://api.conceptnet.io/query?start=/c/en/music&rel=/r/UsedFor&limit=5",
+    "headers": {
+      "Accept": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/ld+json"
+    },
+    "body": {
+      "@context": [
+        "http://api.conceptnet.io/ld/conceptnet5.7/context.ld.json"
+      ],
+      "@id": "/query?start=/c/en/music&rel=/r/UsedFor&limit=5",
+      "edges": [
+        {
+          "@id": "/a/[/r/UsedFor/,/c/en/music/,/c/en/entertainment/]",
+          "start": {
+            "@id": "/c/en/music",
+            "label": "music",
+            "language": "en",
+            "term": "/c/en/music"
+          },
+          "end": {
+            "@id": "/c/en/entertainment",
+            "label": "entertainment",
+            "language": "en",
+            "term": "/c/en/entertainment"
+          },
+          "rel": {
+            "@id": "/r/UsedFor",
+            "label": "UsedFor"
+          },
+          "surfaceText": "[[Music]] is used for [[entertainment]].",
+          "weight": 4.0,
+          "license": "cc:by/4.0",
+          "dataset": "/d/conceptnet/en",
+          "sources": [
+            {"@id": "/s/resource/conceptnet/4/en"}
+          ]
+        },
+        {
+          "@id": "/a/[/r/UsedFor/,/c/en/music/,/c/en/dancing/]",
+          "start": {
+            "@id": "/c/en/music",
+            "label": "music",
+            "language": "en",
+            "term": "/c/en/music"
+          },
+          "end": {
+            "@id": "/c/en/dancing",
+            "label": "dancing",
+            "language": "en",
+            "term": "/c/en/dancing"
+          },
+          "rel": {
+            "@id": "/r/UsedFor",
+            "label": "UsedFor"
+          },
+          "surfaceText": "[[Music]] is used for [[dancing]].",
+          "weight": 3.46,
+          "license": "cc:by/4.0",
+          "dataset": "/d/verbosity",
+          "sources": [
+            {"@id": "/s/resource/verbosity"}
+          ]
+        }
+      ],
+      "view": {
+        "@id": "/query?start=/c/en/music&rel=/r/UsedFor&offset=0&limit=5",
+        "paginatedProperty": "edges",
+        "firstPage": "/query?start=/c/en/music&rel=/r/UsedFor&offset=0&limit=5",
+        "nextPage": "/query?start=/c/en/music&rel=/r/UsedFor&offset=5&limit=5",
+        "comment": "Results 1-2 of 2"
+      }
+    }
+  }
+}

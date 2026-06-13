@@ -1,0 +1,36 @@
+{
+  "title": "Compute relatedness between two concepts: /relatedness?node1=/c/en/dog&node2=/c/en/cat",
+  "description": "Example of using the /relatedness endpoint to compute the semantic similarity score between 'dog' and 'cat' using ConceptNet Numberbatch word vectors. Returns a float between 0 and 1.",
+  "request": {
+    "method": "GET",
+    "url": "https://api.conceptnet.io/relatedness?node1=/c/en/dog&node2=/c/en/cat",
+    "headers": {
+      "Accept": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/ld+json"
+    },
+    "body": {
+      "@context": [
+        "http://api.conceptnet.io/ld/conceptnet5.7/context.ld.json"
+      ],
+      "@id": "/relatedness?node1=/c/en/dog&node2=/c/en/cat",
+      "value": 0.849,
+      "node1": {
+        "@id": "/c/en/dog",
+        "label": "dog",
+        "language": "en",
+        "term": "/c/en/dog"
+      },
+      "node2": {
+        "@id": "/c/en/cat",
+        "label": "cat",
+        "language": "en",
+        "term": "/c/en/cat"
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "title": "Find semantically related concepts: /related/c/en/music",
+  "description": "Example of using the /related endpoint to retrieve the top concepts most semantically related to 'music' using Numberbatch embeddings, restricted to English concepts via the filter parameter.",
+  "request": {
+    "method": "GET",
+    "url": "https://api.conceptnet.io/related/c/en/music?filter=/c/en&limit=10",
+    "headers": {
+      "Accept": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/ld+json"
+    },
+    "body": {
+      "@context": [
+        "http://api.conceptnet.io/ld/conceptnet5.7/context.ld.json"
+      ],
+      "@id": "/related/c/en/music?filter=/c/en&limit=10",
+      "related": [
+        {"@id": "/c/en/musical", "weight": 0.912},
+        {"@id": "/c/en/song", "weight": 0.891},
+        {"@id": "/c/en/audio", "weight": 0.876},
+        {"@id": "/c/en/melody", "weight": 0.863},
+        {"@id": "/c/en/rhythm", "weight": 0.847},
+        {"@id": "/c/en/concert", "weight": 0.831},
+        {"@id": "/c/en/band", "weight": 0.819},
+        {"@id": "/c/en/instrument", "weight": 0.804},
+        {"@id": "/c/en/album", "weight": 0.798},
+        {"@id": "/c/en/sound", "weight": 0.783}
+      ]
+    }
+  }
+}
