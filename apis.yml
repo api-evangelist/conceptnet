@@ -54,6 +54,8 @@ apis:
       - type: Downloads
         url: https://github.com/commonsense/conceptnet5/wiki/Downloads
 common:
+  - type: DomainSecurity
+    url: security/conceptnet-domain-security.yml
   - type: Website
     url: https://conceptnet.io
   - type: Documentation
