@@ -54,6 +54,8 @@ apis:
       - type: Downloads
         url: https://github.com/commonsense/conceptnet5/wiki/Downloads
 common:
+  - type: AgenticAccess
+    url: agentic-access/conceptnet-agentic-access.yml
   - type: DomainSecurity
     url: security/conceptnet-domain-security.yml
   - type: Website
