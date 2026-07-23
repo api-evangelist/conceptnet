@@ -1,0 +1,205 @@
+openapi: 3.0.3
+info:
+  title: ConceptNet REST Concepts Sources API
+  description: ConceptNet is a freely available multilingual knowledge graph providing computers access to common-sense knowledge. The REST API exposes the full ConceptNet 5 knowledge graph via JSON-LD endpoints. Consumers can look up concept nodes by language and term, query edges by relation type, retrieve semantically related terms ranked by Numberbatch embedding similarity, compute pairwise relatedness scores between concepts, and normalize natural-language text into canonical ConceptNet URIs. No authentication or API key is required.
+  version: '5.7'
+  license:
+    name: CC BY-SA 4.0
+    url: https://creativecommons.org/licenses/by-sa/4.0/
+  contact:
+    name: ConceptNet Users Group
+    url: https://groups.google.com/g/conceptnet-users
+  x-website: https://conceptnet.io
+  x-github: https://github.com/commonsense/conceptnet5
+servers:
+- url: https://api.conceptnet.io
+  description: ConceptNet public API
+tags:
+- name: Sources
+  description: Access provenance and source information
+paths:
+  /s/{sourcePath}:
+    get:
+      operationId: getSource
+      summary: Look up a data source
+      description: Returns information about a ConceptNet data source such as Open Mind Common Sense, Wiktionary, WordNet, or a specific contributor. Source URIs take the form /s/resource/{dataset} or /s/contributor/omcs/{username}.
+      tags:
+      - Sources
+      parameters:
+      - name: sourcePath
+        in: path
+        description: Source path (e.g. resource/wordnet/3.1 or contributor/omcs/johndoe)
+        required: true
+        schema:
+          type: string
+          example: resource/wordnet/3.1
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: Source node with provenance information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceNode'
+        '404':
+          description: Source not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    SourceNode:
+      type: object
+      description: JSON-LD node representing a ConceptNet data source
+      properties:
+        '@context':
+          type: array
+          items:
+            type: string
+        '@id':
+          type: string
+          description: Source URI
+          example: /s/resource/wordnet/3.1
+        edges:
+          type: array
+          items:
+            $ref: '#/components/schemas/Edge'
+        view:
+          $ref: '#/components/schemas/Pagination'
+    RelationRef:
+      type: object
+      description: Reference to a ConceptNet relation type
+      properties:
+        '@id':
+          type: string
+          description: Relation URI
+          example: /r/IsA
+        label:
+          type: string
+          description: Human-readable relation name
+          example: IsA
+    Error:
+      type: object
+      description: API error response
+      properties:
+        error:
+          type: string
+          description: Error type identifier
+        details:
+          type: string
+          description: Human-readable error description
+    SourceRef:
+      type: object
+      description: Reference to a data source or contributor
+      properties:
+        '@id':
+          type: string
+          description: Source URI
+          example: /s/resource/verbosity
+    ConceptRef:
+      type: object
+      description: Reference to a ConceptNet concept node
+      properties:
+        '@id':
+          type: string
+          description: ConceptNet URI
+          example: /c/en/dog
+        label:
+          type: string
+          description: Human-readable label
+          example: dog
+        language:
+          type: string
+          description: BCP-47 language code
+          example: en
+        term:
+          type: string
+          description: Concept URI (same as @id)
+          example: /c/en/dog
+        sense_label:
+          type: string
+          description: Part-of-speech or sense label if applicable
+          example: n
+    Edge:
+      type: object
+      description: A single ConceptNet assertion (knowledge edge)
+      properties:
+        '@id':
+          type: string
+          description: Unique URI identifier for this edge
+          example: /a/[/r/IsA/,/c/en/dog/,/c/en/animal/]
+        start:
+          $ref: '#/components/schemas/ConceptRef'
+        end:
+          $ref: '#/components/schemas/ConceptRef'
+        rel:
+          $ref: '#/components/schemas/RelationRef'
+        surfaceText:
+          type: string
+          nullable: true
+          description: Natural-language sentence the assertion was derived from
+          example: '[[A dog]] is a [[animal]].'
+        weight:
+          type: number
+          format: float
+          description: Confidence weight of the assertion (typically 1.0+)
+          example: 3.46
+        license:
+          type: string
+          description: Creative Commons license identifier
+          example: cc:by/4.0
+        dataset:
+          type: string
+          description: Dataset URI this assertion came from
+          example: /d/verbosity
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceRef'
+    Pagination:
+      type: object
+      description: Pagination metadata for list responses
+      properties:
+        '@id':
+          type: string
+          description: URI of the current page
+        paginatedProperty:
+          type: string
+          description: Property name that contains the paginated items
+          example: edges
+        firstPage:
+          type: string
+          description: URI of the first page
+        nextPage:
+          type: string
+          description: URI of the next page (absent on last page)
+        previousPage:
+          type: string
+          description: URI of the previous page (absent on first page)
+        comment:
+          type: string
+          description: Human-readable summary of current result range
+          example: Results 1-20 of 143
+  parameters:
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination (0-100000)
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 100000
+        default: 0
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return (0-1000)
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 1000
+        default: 20

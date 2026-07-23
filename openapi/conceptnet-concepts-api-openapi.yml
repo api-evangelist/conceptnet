@@ -1,0 +1,287 @@
+openapi: 3.0.3
+info:
+  title: ConceptNet REST Concepts API
+  description: ConceptNet is a freely available multilingual knowledge graph providing computers access to common-sense knowledge. The REST API exposes the full ConceptNet 5 knowledge graph via JSON-LD endpoints. Consumers can look up concept nodes by language and term, query edges by relation type, retrieve semantically related terms ranked by Numberbatch embedding similarity, compute pairwise relatedness scores between concepts, and normalize natural-language text into canonical ConceptNet URIs. No authentication or API key is required.
+  version: '5.7'
+  license:
+    name: CC BY-SA 4.0
+    url: https://creativecommons.org/licenses/by-sa/4.0/
+  contact:
+    name: ConceptNet Users Group
+    url: https://groups.google.com/g/conceptnet-users
+  x-website: https://conceptnet.io
+  x-github: https://github.com/commonsense/conceptnet5
+servers:
+- url: https://api.conceptnet.io
+  description: ConceptNet public API
+tags:
+- name: Concepts
+  description: Look up concept nodes in the knowledge graph
+paths:
+  /c/{language}/{term}:
+    get:
+      operationId: getConcept
+      summary: Look up a concept node
+      description: Returns a JSON-LD node object for the concept identified by language and term. The response includes all edges (assertions) connecting the concept to other concepts, paginated via offset and limit. The term may include underscores in place of spaces and an optional sense disambiguation suffix (e.g. /c/en/lead/n for the noun sense of "lead").
+      tags:
+      - Concepts
+      parameters:
+      - $ref: '#/components/parameters/language'
+      - $ref: '#/components/parameters/term'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/limit'
+      - name: grouped
+        in: query
+        description: When true, groups edges by relation type rather than returning a flat list.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Concept node with edges
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConceptNode'
+              example:
+                '@context':
+                - http://api.conceptnet.io/ld/conceptnet5.7/context.ld.json
+                '@id': /c/en/example
+                edges:
+                - '@id': /a/[/r/IsA/,/c/en/example/,/c/en/instance/]
+                  start:
+                    '@id': /c/en/example
+                    label: example
+                    language: en
+                    term: /c/en/example
+                  end:
+                    '@id': /c/en/instance
+                    label: instance
+                    language: en
+                    term: /c/en/instance
+                  rel:
+                    '@id': /r/IsA
+                    label: IsA
+                  weight: 3.46
+                  license: cc:by/4.0
+                  dataset: /d/verbosity
+                view:
+                  '@id': /c/en/example?offset=0&limit=20
+                  paginatedProperty: edges
+                  firstPage: /c/en/example?offset=0&limit=20
+                  nextPage: /c/en/example?offset=20&limit=20
+                  comment: Results 1-20 of 143
+        '404':
+          description: Concept not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /c/{language}/{term}/{sense}:
+    get:
+      operationId: getConceptSense
+      summary: Look up a sense-disambiguated concept node
+      description: Returns a JSON-LD node object for a specific word sense of the concept. The sense component is a part-of-speech tag (n, v, a, r) or a more specific sense identifier. For example, /c/en/lead/n returns the noun sense of "lead" while /c/en/lead/v returns the verb sense.
+      tags:
+      - Concepts
+      parameters:
+      - $ref: '#/components/parameters/language'
+      - $ref: '#/components/parameters/term'
+      - name: sense
+        in: path
+        description: Part-of-speech tag or sense identifier (e.g. n, v, a, r)
+        required: true
+        schema:
+          type: string
+          example: n
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: Sense-specific concept node with edges
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConceptNode'
+        '404':
+          description: Concept or sense not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  parameters:
+    language:
+      name: language
+      in: path
+      description: BCP-47 language code (e.g. en, fr, de, zh, ja, es)
+      required: true
+      schema:
+        type: string
+        example: en
+    term:
+      name: term
+      in: path
+      description: Concept term in the given language, with spaces replaced by underscores (e.g. french_toast, dog, run_away)
+      required: true
+      schema:
+        type: string
+        example: dog
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return (0-1000)
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 1000
+        default: 20
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination (0-100000)
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 100000
+        default: 0
+  schemas:
+    RelationRef:
+      type: object
+      description: Reference to a ConceptNet relation type
+      properties:
+        '@id':
+          type: string
+          description: Relation URI
+          example: /r/IsA
+        label:
+          type: string
+          description: Human-readable relation name
+          example: IsA
+    Error:
+      type: object
+      description: API error response
+      properties:
+        error:
+          type: string
+          description: Error type identifier
+        details:
+          type: string
+          description: Human-readable error description
+    SourceRef:
+      type: object
+      description: Reference to a data source or contributor
+      properties:
+        '@id':
+          type: string
+          description: Source URI
+          example: /s/resource/verbosity
+    ConceptRef:
+      type: object
+      description: Reference to a ConceptNet concept node
+      properties:
+        '@id':
+          type: string
+          description: ConceptNet URI
+          example: /c/en/dog
+        label:
+          type: string
+          description: Human-readable label
+          example: dog
+        language:
+          type: string
+          description: BCP-47 language code
+          example: en
+        term:
+          type: string
+          description: Concept URI (same as @id)
+          example: /c/en/dog
+        sense_label:
+          type: string
+          description: Part-of-speech or sense label if applicable
+          example: n
+    ConceptNode:
+      type: object
+      description: JSON-LD node object representing a ConceptNet concept
+      properties:
+        '@context':
+          type: array
+          items:
+            type: string
+          description: JSON-LD context URLs
+          example:
+          - http://api.conceptnet.io/ld/conceptnet5.7/context.ld.json
+        '@id':
+          type: string
+          description: ConceptNet URI of the concept
+          example: /c/en/dog
+        edges:
+          type: array
+          items:
+            $ref: '#/components/schemas/Edge'
+          description: List of assertions connecting this concept to others
+        view:
+          $ref: '#/components/schemas/Pagination'
+    Edge:
+      type: object
+      description: A single ConceptNet assertion (knowledge edge)
+      properties:
+        '@id':
+          type: string
+          description: Unique URI identifier for this edge
+          example: /a/[/r/IsA/,/c/en/dog/,/c/en/animal/]
+        start:
+          $ref: '#/components/schemas/ConceptRef'
+        end:
+          $ref: '#/components/schemas/ConceptRef'
+        rel:
+          $ref: '#/components/schemas/RelationRef'
+        surfaceText:
+          type: string
+          nullable: true
+          description: Natural-language sentence the assertion was derived from
+          example: '[[A dog]] is a [[animal]].'
+        weight:
+          type: number
+          format: float
+          description: Confidence weight of the assertion (typically 1.0+)
+          example: 3.46
+        license:
+          type: string
+          description: Creative Commons license identifier
+          example: cc:by/4.0
+        dataset:
+          type: string
+          description: Dataset URI this assertion came from
+          example: /d/verbosity
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceRef'
+    Pagination:
+      type: object
+      description: Pagination metadata for list responses
+      properties:
+        '@id':
+          type: string
+          description: URI of the current page
+        paginatedProperty:
+          type: string
+          description: Property name that contains the paginated items
+          example: edges
+        firstPage:
+          type: string
+          description: URI of the first page
+        nextPage:
+          type: string
+          description: URI of the next page (absent on last page)
+        previousPage:
+          type: string
+          description: URI of the previous page (absent on first page)
+        comment:
+          type: string
+          description: Human-readable summary of current result range
+          example: Results 1-20 of 143

@@ -1,0 +1,87 @@
+openapi: 3.0.3
+info:
+  title: ConceptNet REST Concepts Utilities API
+  description: ConceptNet is a freely available multilingual knowledge graph providing computers access to common-sense knowledge. The REST API exposes the full ConceptNet 5 knowledge graph via JSON-LD endpoints. Consumers can look up concept nodes by language and term, query edges by relation type, retrieve semantically related terms ranked by Numberbatch embedding similarity, compute pairwise relatedness scores between concepts, and normalize natural-language text into canonical ConceptNet URIs. No authentication or API key is required.
+  version: '5.7'
+  license:
+    name: CC BY-SA 4.0
+    url: https://creativecommons.org/licenses/by-sa/4.0/
+  contact:
+    name: ConceptNet Users Group
+    url: https://groups.google.com/g/conceptnet-users
+  x-website: https://conceptnet.io
+  x-github: https://github.com/commonsense/conceptnet5
+servers:
+- url: https://api.conceptnet.io
+  description: ConceptNet public API
+tags:
+- name: Utilities
+  description: URI normalization and text standardization
+paths:
+  /uri:
+    get:
+      operationId: normalizeUri
+      summary: Normalize text to a ConceptNet URI
+      description: Converts a raw natural-language phrase in any supported language into a canonical ConceptNet URI. Handles tokenization, lowercasing, stopword removal, and language-specific normalization. The resulting URI can be used directly in other API endpoints. Also accessible as /normalize and /standardize.
+      tags:
+      - Utilities
+      parameters:
+      - name: text
+        in: query
+        description: Natural-language phrase to normalize (use "text" or "term")
+        required: false
+        schema:
+          type: string
+          example: french toast
+      - name: term
+        in: query
+        description: Alternative parameter name for the phrase to normalize
+        required: false
+        schema:
+          type: string
+      - name: language
+        in: query
+        description: BCP-47 language code for the input text
+        required: true
+        schema:
+          type: string
+          example: en
+      responses:
+        '200':
+          description: Normalized ConceptNet URI
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UriResult'
+              example:
+                '@id': /uri?language=en&text=french+toast
+                uri: /c/en/french_toast
+        '400':
+          description: Missing language or text parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    UriResult:
+      type: object
+      description: URI normalization result
+      properties:
+        '@id':
+          type: string
+          description: URI of this normalization result
+        uri:
+          type: string
+          description: Canonical ConceptNet URI for the input text
+          example: /c/en/french_toast
+    Error:
+      type: object
+      description: API error response
+      properties:
+        error:
+          type: string
+          description: Error type identifier
+        details:
+          type: string
+          description: Human-readable error description

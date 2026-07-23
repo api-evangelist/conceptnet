@@ -1,0 +1,192 @@
+openapi: 3.0.3
+info:
+  title: ConceptNet REST Concepts Similarity API
+  description: ConceptNet is a freely available multilingual knowledge graph providing computers access to common-sense knowledge. The REST API exposes the full ConceptNet 5 knowledge graph via JSON-LD endpoints. Consumers can look up concept nodes by language and term, query edges by relation type, retrieve semantically related terms ranked by Numberbatch embedding similarity, compute pairwise relatedness scores between concepts, and normalize natural-language text into canonical ConceptNet URIs. No authentication or API key is required.
+  version: '5.7'
+  license:
+    name: CC BY-SA 4.0
+    url: https://creativecommons.org/licenses/by-sa/4.0/
+  contact:
+    name: ConceptNet Users Group
+    url: https://groups.google.com/g/conceptnet-users
+  x-website: https://conceptnet.io
+  x-github: https://github.com/commonsense/conceptnet5
+servers:
+- url: https://api.conceptnet.io
+  description: ConceptNet public API
+tags:
+- name: Similarity
+  description: Semantic similarity and relatedness using Numberbatch embeddings
+paths:
+  /related/{uri}:
+    get:
+      operationId: getRelatedConcepts
+      summary: Find semantically related concepts
+      description: Returns a ranked list of concepts most semantically related to the given URI, using ConceptNet Numberbatch word vector similarity. Results are sorted by descending relatedness weight. This endpoint and /relatedness each count as 2 requests against the rate limit quota (3,600 req/hour, 120 req/min). The optional filter parameter restricts results to a particular language subtree.
+      tags:
+      - Similarity
+      parameters:
+      - name: uri
+        in: path
+        description: ConceptNet URI path (e.g. c/en/dog — the leading slash is part of the base path, so omit it here)
+        required: true
+        schema:
+          type: string
+          example: c/en/dog
+      - name: limit
+        in: query
+        description: Maximum number of related concepts to return (0-100)
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100
+          default: 50
+      - name: filter
+        in: query
+        description: Restrict results to URIs under this prefix (e.g. /c/en to limit to English concepts)
+        required: false
+        schema:
+          type: string
+          example: /c/en
+      responses:
+        '200':
+          description: Ranked list of related concepts with weights
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelatedList'
+              example:
+                '@id': /related/c/en/dog
+                related:
+                - '@id': /c/en/puppy
+                  weight: 0.713
+                - '@id': /c/en/canine
+                  weight: 0.698
+                - '@id': /c/en/pet
+                  weight: 0.621
+        '404':
+          description: URI not found in embedding space
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /relatedness:
+    get:
+      operationId: getRelatedness
+      summary: Compute pairwise relatedness score
+      description: Returns a single floating-point relatedness score between 0 and 1 for any two ConceptNet concept URIs, computed from Numberbatch word vector cosine similarity. A score of 1.0 indicates maximum similarity and 0.0 indicates no detectable relationship. This endpoint and /related each count as 2 requests against the rate limit quota.
+      tags:
+      - Similarity
+      parameters:
+      - name: node1
+        in: query
+        description: First ConceptNet concept URI
+        required: true
+        schema:
+          type: string
+          example: /c/en/dog
+      - name: node2
+        in: query
+        description: Second ConceptNet concept URI
+        required: true
+        schema:
+          type: string
+          example: /c/en/cat
+      responses:
+        '200':
+          description: Relatedness result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelatednessResult'
+              example:
+                '@id': /relatedness?node1=/c/en/dog&node2=/c/en/cat
+                value: 0.849
+                node1:
+                  '@id': /c/en/dog
+                node2:
+                  '@id': /c/en/cat
+        '400':
+          description: Missing or invalid node parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    RelatednessResult:
+      type: object
+      description: Pairwise semantic relatedness result
+      properties:
+        '@id':
+          type: string
+          description: URI of this relatedness result
+        value:
+          type: number
+          format: float
+          description: Relatedness score between 0.0 and 1.0
+          example: 0.849
+        node1:
+          $ref: '#/components/schemas/ConceptRef'
+        node2:
+          $ref: '#/components/schemas/ConceptRef'
+    WeightedConcept:
+      type: object
+      description: A concept with a numeric relatedness weight
+      properties:
+        '@id':
+          type: string
+          description: ConceptNet URI of the related concept
+          example: /c/en/puppy
+        weight:
+          type: number
+          format: float
+          description: Relatedness score (0.0-1.0)
+          example: 0.713
+    RelatedList:
+      type: object
+      description: Ranked list of semantically related concepts
+      properties:
+        '@id':
+          type: string
+          description: URI of this related-terms result
+          example: /related/c/en/dog
+        related:
+          type: array
+          items:
+            $ref: '#/components/schemas/WeightedConcept'
+    Error:
+      type: object
+      description: API error response
+      properties:
+        error:
+          type: string
+          description: Error type identifier
+        details:
+          type: string
+          description: Human-readable error description
+    ConceptRef:
+      type: object
+      description: Reference to a ConceptNet concept node
+      properties:
+        '@id':
+          type: string
+          description: ConceptNet URI
+          example: /c/en/dog
+        label:
+          type: string
+          description: Human-readable label
+          example: dog
+        language:
+          type: string
+          description: BCP-47 language code
+          example: en
+        term:
+          type: string
+          description: Concept URI (same as @id)
+          example: /c/en/dog
+        sense_label:
+          type: string
+          description: Part-of-speech or sense label if applicable
+          example: n
