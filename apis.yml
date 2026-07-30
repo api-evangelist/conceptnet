@@ -11,6 +11,18 @@ description: >-
   embeddings aligned across languages that outperform word2vec, GloVe, and
   fastText on standard benchmarks.
 url: https://conceptnet.io
+accessModel:
+  pricing: free
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Free
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
 image: https://conceptnet.io/img/conceptnet-logo.png
 specificationVersion: '0.19'
 created: '2026-06-13'
@@ -27,32 +39,99 @@ tags:
   - Linked Data
   - Open Data
 apis:
-  - name: ConceptNet REST API
-    description: >-
-      The ConceptNet REST API exposes the full ConceptNet 5 knowledge graph
-      via JSON-LD endpoints. Consumers can look up concept nodes by language
-      and term, query edges by relation type, retrieve semantically related
-      terms ranked by Numberbatch embedding similarity, compute pairwise
-      relatedness scores between concepts, and normalize natural-language
-      text into canonical ConceptNet URIs. No authentication or API key is
-      required. Rate limits of 3,600 requests/hour and 120 requests/minute
-      apply. The /related and /relatedness endpoints each count as 2 requests
-      against the quota.
-    humanURL: https://github.com/commonsense/conceptnet5/wiki/API
-    baseURL: https://api.conceptnet.io
-    tags:
-      - Knowledge Graph
-      - NLP
-      - Semantic Relations
-      - Multilingual
-      - Common Sense
-    properties:
-      - type: Documentation
-        url: https://github.com/commonsense/conceptnet5/wiki/API
-      - type: GettingStarted
-        url: https://github.com/commonsense/conceptnet5/wiki
-      - type: Downloads
-        url: https://github.com/commonsense/conceptnet5/wiki/Downloads
+- name: ConceptNet REST API
+  description: >-
+    The ConceptNet REST API exposes the full ConceptNet 5 knowledge graph via JSON-LD endpoints. Consumers
+    can look up concept nodes by language and term, query edges by relation type, retrieve semantically
+    related terms ranked by Numberbatch embedding similarity, compute pairwise relatedness scores between
+    concepts, and normalize natural-language text into canonical ConceptNet URIs. No authentication or
+    API key is required. Rate limits of 3,600 requests/hour and 120 requests/minute apply. The /related
+    and /relatedness endpoints each count as 2 requests against the quota.
+  humanURL: https://github.com/commonsense/conceptnet5/wiki/API
+  baseURL: https://api.conceptnet.io
+  tags:
+  - Knowledge Graph
+  - NLP
+  - Semantic Relations
+  - Multilingual
+  - Common Sense
+  properties:
+  - type: Documentation
+    url: https://github.com/commonsense/conceptnet5/wiki/API
+  - type: GettingStarted
+    url: https://github.com/commonsense/conceptnet5/wiki
+  - type: Downloads
+    url: https://github.com/commonsense/conceptnet5/wiki/Downloads
+- aid: conceptnet:conceptnet-concepts-api
+  name: ConceptNet Concepts API
+  description: Look up concept nodes in the knowledge graph
+  humanURL: https://github.com/commonsense/conceptnet5/wiki/API
+  baseURL: https://api.conceptnet.io
+  tags:
+  - Concepts
+  properties:
+  - type: OpenAPI
+    url: openapi/conceptnet-concepts-api-openapi.yml
+- aid: conceptnet:conceptnet-edges-api
+  name: ConceptNet Edges API
+  description: Access individual edge (assertion) records
+  humanURL: https://github.com/commonsense/conceptnet5/wiki/API
+  baseURL: https://api.conceptnet.io
+  tags:
+  - Edges
+  properties:
+  - type: OpenAPI
+    url: openapi/conceptnet-edges-api-openapi.yml
+- aid: conceptnet:conceptnet-query-api
+  name: ConceptNet Query API
+  description: Complex multi-parameter edge queries
+  humanURL: https://github.com/commonsense/conceptnet5/wiki/API
+  baseURL: https://api.conceptnet.io
+  tags:
+  - Query
+  properties:
+  - type: OpenAPI
+    url: openapi/conceptnet-query-api-openapi.yml
+- aid: conceptnet:conceptnet-relations-api
+  name: ConceptNet Relations API
+  description: Browse edges grouped by relation type
+  humanURL: https://github.com/commonsense/conceptnet5/wiki/API
+  baseURL: https://api.conceptnet.io
+  tags:
+  - Relations
+  properties:
+  - type: OpenAPI
+    url: openapi/conceptnet-relations-api-openapi.yml
+- aid: conceptnet:conceptnet-similarity-api
+  name: ConceptNet Similarity API
+  description: Semantic similarity and relatedness using Numberbatch embeddings
+  humanURL: https://github.com/commonsense/conceptnet5/wiki/API
+  baseURL: https://api.conceptnet.io
+  tags:
+  - Similarity
+  properties:
+  - type: OpenAPI
+    url: openapi/conceptnet-similarity-api-openapi.yml
+- aid: conceptnet:conceptnet-sources-api
+  name: ConceptNet Sources API
+  description: Access provenance and source information
+  humanURL: https://github.com/commonsense/conceptnet5/wiki/API
+  baseURL: https://api.conceptnet.io
+  tags:
+  - Sources
+  properties:
+  - type: OpenAPI
+    url: openapi/conceptnet-sources-api-openapi.yml
+- aid: conceptnet:conceptnet-utilities-api
+  name: ConceptNet Utilities API
+  description: URI normalization and text standardization
+  humanURL: https://github.com/commonsense/conceptnet5/wiki/API
+  baseURL: https://api.conceptnet.io
+  tags:
+  - Utilities
+  properties:
+  - type: OpenAPI
+    url: openapi/conceptnet-utilities-api-openapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/conceptnet-agentic-access.yml
