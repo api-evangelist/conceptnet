@@ -1,0 +1,26 @@
+{
+  "provider": "conceptnet",
+  "sources": [
+    "conceptnet-concepts-api-openapi.yml",
+    "conceptnet-edges-api-openapi.yml",
+    "conceptnet-query-api-openapi.yml",
+    "conceptnet-relations-api-openapi.yml",
+    "conceptnet-similarity-api-openapi.yml",
+    "conceptnet-sources-api-openapi.yml",
+    "conceptnet-utilities-api-openapi.yml"
+  ],
+  "outputs": [
+    "conceptnet-concepts-api-openapi.yml",
+    "conceptnet-edges-api-openapi.yml",
+    "conceptnet-query-api-openapi.yml",
+    "conceptnet-relations-api-openapi.yml",
+    "conceptnet-similarity-api-openapi.yml",
+    "conceptnet-sources-api-openapi.yml",
+    "conceptnet-utilities-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
