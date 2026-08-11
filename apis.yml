@@ -133,6 +133,8 @@ apis:
   - type: OpenAPI
     url: openapi/conceptnet-utilities-api-openapi.yml
 common:
+  - type: IssueTracker
+    url: https://github.com/commonsense/conceptnet5/issues
   - type: AgenticAccess
     url: agentic-access/conceptnet-agentic-access.yml
   - type: DomainSecurity
