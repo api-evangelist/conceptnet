@@ -1,0 +1,164 @@
+{
+  "item": [
+    {
+      "id": "8a9d6cc6-b46b-4eae-85d3-19a4a34b12d6",
+      "name": "Edges",
+      "description": {
+        "content": "Access individual edge (assertion) records",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "37bec98d-a5c0-414e-a9e0-8af7f3639aed",
+          "name": "Look up an individual edge (assertion)",
+          "request": {
+            "name": "Look up an individual edge (assertion)",
+            "description": {
+              "content": "Returns a JSON-LD edge object for the assertion identified by edgeId. Edge IDs are constructed from the start URI, relation URI, and end URI in the form /a/[/{rel}/,{start},/{end}/]. Each edge carries a weight, license, dataset, and source attribution.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "a",
+                ":edgeId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "edgeId",
+                  "description": "(Required) Edge identifier path (URL-encoded brackets and slashes)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f75f4fad-109b-484b-94df-bc62b6db8027",
+              "name": "Edge assertion object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "a",
+                    ":edgeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "edgeId",
+                      "description": "(Required) Edge identifier path (URL-encoded brackets and slashes)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@id\": \"/a/[/r/IsA/,/c/en/dog/,/c/en/animal/]\",\n  \"start\": {\n    \"@id\": \"/c/en/dog\",\n    \"label\": \"dog\",\n    \"language\": \"en\",\n    \"term\": \"/c/en/dog\",\n    \"sense_label\": \"n\"\n  },\n  \"end\": {\n    \"@id\": \"/c/en/dog\",\n    \"label\": \"dog\",\n    \"language\": \"en\",\n    \"term\": \"/c/en/dog\",\n    \"sense_label\": \"n\"\n  },\n  \"rel\": {\n    \"@id\": \"/r/IsA\",\n    \"label\": \"IsA\"\n  },\n  \"surfaceText\": \"[[A dog]] is a [[animal]].\",\n  \"weight\": 3.46,\n  \"license\": \"cc:by/4.0\",\n  \"dataset\": \"/d/verbosity\",\n  \"sources\": [\n    {\n      \"@id\": \"/s/resource/verbosity\"\n    },\n    {\n      \"@id\": \"/s/resource/verbosity\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "671e22b7-a567-49ce-a5d6-fad38e0751a8",
+              "name": "Edge not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "a",
+                    ":edgeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "edgeId",
+                      "description": "(Required) Edge identifier path (URL-encoded brackets and slashes)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.conceptnet.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "269f8607-a57e-404f-8e19-f78c93d377de",
+    "name": "ConceptNet REST Concepts Edges API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "ConceptNet is a freely available multilingual knowledge graph providing computers access to common-sense knowledge. The REST API exposes the full ConceptNet 5 knowledge graph via JSON-LD endpoints. Consumers can look up concept nodes by language and term, query edges by relation type, retrieve semantically related terms ranked by Numberbatch embedding similarity, compute pairwise relatedness scores between concepts, and normalize natural-language text into canonical ConceptNet URIs. No authentication or API key is required.\n\nContact Support:\n Name: ConceptNet Users Group",
+      "type": "text/plain"
+    }
+  }
+}

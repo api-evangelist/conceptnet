@@ -1,0 +1,444 @@
+{
+  "item": [
+    {
+      "id": "593c82a3-30e6-4775-8941-0196464fa542",
+      "name": "Concepts",
+      "description": {
+        "content": "Look up concept nodes in the knowledge graph",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d35c51bb-d199-4f59-9c88-7504a9e152d6",
+          "name": "Look up a concept node",
+          "request": {
+            "name": "Look up a concept node",
+            "description": {
+              "content": "Returns a JSON-LD node object for the concept identified by language and term. The response includes all edges (assertions) connecting the concept to other concepts, paginated via offset and limit. The term may include underscores in place of spaces and an optional sense disambiguation suffix (e.g. /c/en/lead/n for the noun sense of \"lead\").",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "c",
+                ":language",
+                ":term"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination (0-100000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum number of results to return (0-1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "grouped",
+                  "value": "false",
+                  "description": "When true, groups edges by relation type rather than returning a flat list."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "language",
+                  "description": "(Required) BCP-47 language code (e.g. en, fr, de, zh, ja, es)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "term",
+                  "description": "(Required) Concept term in the given language, with spaces replaced by underscores (e.g. french_toast, dog, run_away)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "48466cf3-92f7-4d45-9e6c-48270651056f",
+              "name": "Concept node with edges",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "c",
+                    ":language",
+                    ":term"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "grouped",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "language",
+                      "description": "(Required) BCP-47 language code (e.g. en, fr, de, zh, ja, es)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "term",
+                      "description": "(Required) Concept term in the given language, with spaces replaced by underscores (e.g. french_toast, dog, run_away)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@context\": [\n    \"http://api.conceptnet.io/ld/conceptnet5.7/context.ld.json\"\n  ],\n  \"@id\": \"/c/en/example\",\n  \"edges\": [\n    {\n      \"@id\": \"/a/[/r/IsA/,/c/en/example/,/c/en/instance/]\",\n      \"start\": {\n        \"@id\": \"/c/en/example\",\n        \"label\": \"example\",\n        \"language\": \"en\",\n        \"term\": \"/c/en/example\"\n      },\n      \"end\": {\n        \"@id\": \"/c/en/instance\",\n        \"label\": \"instance\",\n        \"language\": \"en\",\n        \"term\": \"/c/en/instance\"\n      },\n      \"rel\": {\n        \"@id\": \"/r/IsA\",\n        \"label\": \"IsA\"\n      },\n      \"weight\": 3.46,\n      \"license\": \"cc:by/4.0\",\n      \"dataset\": \"/d/verbosity\"\n    }\n  ],\n  \"view\": {\n    \"@id\": \"/c/en/example?offset=0&limit=20\",\n    \"paginatedProperty\": \"edges\",\n    \"firstPage\": \"/c/en/example?offset=0&limit=20\",\n    \"nextPage\": \"/c/en/example?offset=20&limit=20\",\n    \"comment\": \"Results 1-20 of 143\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5406882-f699-422a-acb5-4729d2636a73",
+              "name": "Concept not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "c",
+                    ":language",
+                    ":term"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "grouped",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "language",
+                      "description": "(Required) BCP-47 language code (e.g. en, fr, de, zh, ja, es)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "term",
+                      "description": "(Required) Concept term in the given language, with spaces replaced by underscores (e.g. french_toast, dog, run_away)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a19bf543-fc5e-4708-a0f6-75a6bb8181b3",
+          "name": "Look up a sense-disambiguated concept node",
+          "request": {
+            "name": "Look up a sense-disambiguated concept node",
+            "description": {
+              "content": "Returns a JSON-LD node object for a specific word sense of the concept. The sense component is a part-of-speech tag (n, v, a, r) or a more specific sense identifier. For example, /c/en/lead/n returns the noun sense of \"lead\" while /c/en/lead/v returns the verb sense.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "c",
+                ":language",
+                ":term",
+                ":sense"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination (0-100000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum number of results to return (0-1000)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "language",
+                  "description": "(Required) BCP-47 language code (e.g. en, fr, de, zh, ja, es)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "term",
+                  "description": "(Required) Concept term in the given language, with spaces replaced by underscores (e.g. french_toast, dog, run_away)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sense",
+                  "description": "(Required) Part-of-speech tag or sense identifier (e.g. n, v, a, r)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "72627e1e-897e-4ff8-8952-6730fba7bd80",
+              "name": "Sense-specific concept node with edges",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "c",
+                    ":language",
+                    ":term",
+                    ":sense"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "language",
+                      "description": "(Required) BCP-47 language code (e.g. en, fr, de, zh, ja, es)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "term",
+                      "description": "(Required) Concept term in the given language, with spaces replaced by underscores (e.g. french_toast, dog, run_away)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sense",
+                      "description": "(Required) Part-of-speech tag or sense identifier (e.g. n, v, a, r)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@context\": [\n    \"http://api.conceptnet.io/ld/conceptnet5.7/context.ld.json\"\n  ],\n  \"@id\": \"/c/en/dog\",\n  \"edges\": [\n    {\n      \"@id\": \"/a/[/r/IsA/,/c/en/dog/,/c/en/animal/]\",\n      \"start\": {\n        \"@id\": \"/c/en/dog\",\n        \"label\": \"dog\",\n        \"language\": \"en\",\n        \"term\": \"/c/en/dog\",\n        \"sense_label\": \"n\"\n      },\n      \"end\": {\n        \"@id\": \"/c/en/dog\",\n        \"label\": \"dog\",\n        \"language\": \"en\",\n        \"term\": \"/c/en/dog\",\n        \"sense_label\": \"n\"\n      },\n      \"rel\": {\n        \"@id\": \"/r/IsA\",\n        \"label\": \"IsA\"\n      },\n      \"surfaceText\": \"[[A dog]] is a [[animal]].\",\n      \"weight\": 3.46,\n      \"license\": \"cc:by/4.0\",\n      \"dataset\": \"/d/verbosity\",\n      \"sources\": [\n        {\n          \"@id\": \"/s/resource/verbosity\"\n        },\n        {\n          \"@id\": \"/s/resource/verbosity\"\n        }\n      ]\n    },\n    {\n      \"@id\": \"/a/[/r/IsA/,/c/en/dog/,/c/en/animal/]\",\n      \"start\": {\n        \"@id\": \"/c/en/dog\",\n        \"label\": \"dog\",\n        \"language\": \"en\",\n        \"term\": \"/c/en/dog\",\n        \"sense_label\": \"n\"\n      },\n      \"end\": {\n        \"@id\": \"/c/en/dog\",\n        \"label\": \"dog\",\n        \"language\": \"en\",\n        \"term\": \"/c/en/dog\",\n        \"sense_label\": \"n\"\n      },\n      \"rel\": {\n        \"@id\": \"/r/IsA\",\n        \"label\": \"IsA\"\n      },\n      \"surfaceText\": \"[[A dog]] is a [[animal]].\",\n      \"weight\": 3.46,\n      \"license\": \"cc:by/4.0\",\n      \"dataset\": \"/d/verbosity\",\n      \"sources\": [\n        {\n          \"@id\": \"/s/resource/verbosity\"\n        },\n        {\n          \"@id\": \"/s/resource/verbosity\"\n        }\n      ]\n    }\n  ],\n  \"view\": {\n    \"@id\": \"string\",\n    \"paginatedProperty\": \"edges\",\n    \"firstPage\": \"string\",\n    \"nextPage\": \"string\",\n    \"previousPage\": \"string\",\n    \"comment\": \"Results 1-20 of 143\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "226d4c04-d384-4bbf-9d0e-dbc7c710185b",
+              "name": "Concept or sense not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "c",
+                    ":language",
+                    ":term",
+                    ":sense"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "language",
+                      "description": "(Required) BCP-47 language code (e.g. en, fr, de, zh, ja, es)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "term",
+                      "description": "(Required) Concept term in the given language, with spaces replaced by underscores (e.g. french_toast, dog, run_away)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sense",
+                      "description": "(Required) Part-of-speech tag or sense identifier (e.g. n, v, a, r)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.conceptnet.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "459528e9-e1fd-4c20-ab9d-da879f61d8a8",
+    "name": "ConceptNet REST Concepts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "ConceptNet is a freely available multilingual knowledge graph providing computers access to common-sense knowledge. The REST API exposes the full ConceptNet 5 knowledge graph via JSON-LD endpoints. Consumers can look up concept nodes by language and term, query edges by relation type, retrieve semantically related terms ranked by Numberbatch embedding similarity, compute pairwise relatedness scores between concepts, and normalize natural-language text into canonical ConceptNet URIs. No authentication or API key is required.\n\nContact Support:\n Name: ConceptNet Users Group",
+      "type": "text/plain"
+    }
+  }
+}

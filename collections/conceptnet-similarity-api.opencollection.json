@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ConceptNet REST Concepts Similarity API",
+    "version": "5.7"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Similarity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Find semantically related concepts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.conceptnet.io/related/:uri",
+            "params": [
+              {
+                "name": "uri",
+                "value": "",
+                "type": "path",
+                "description": "ConceptNet URI path (e.g. c/en/dog — the leading slash is part of the base path, so omit it here)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related concepts to return (0-100)"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Restrict results to URIs under this prefix (e.g. /c/en to limit to English concepts)"
+              }
+            ]
+          },
+          "docs": "Returns a ranked list of concepts most semantically related to the given URI, using ConceptNet Numberbatch word vector similarity. Results are sorted by descending relatedness weight. This endpoint and /relatedness each count as 2 requests against the rate limit quota (3,600 req/hour, 120 req/min). The optional filter parameter restricts results to a particular language subtree."
+        },
+        {
+          "info": {
+            "name": "Compute pairwise relatedness score",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.conceptnet.io/relatedness",
+            "params": [
+              {
+                "name": "node1",
+                "value": "",
+                "type": "query",
+                "description": "First ConceptNet concept URI"
+              },
+              {
+                "name": "node2",
+                "value": "",
+                "type": "query",
+                "description": "Second ConceptNet concept URI"
+              }
+            ]
+          },
+          "docs": "Returns a single floating-point relatedness score between 0 and 1 for any two ConceptNet concept URIs, computed from Numberbatch word vector cosine similarity. A score of 1.0 indicates maximum similarity and 0.0 indicates no detectable relationship. This endpoint and /related each count as 2 requests against the rate limit quota."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

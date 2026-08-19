@@ -1,0 +1,331 @@
+{
+  "item": [
+    {
+      "id": "dfaeb721-6750-429e-9b3a-2b911d03ea21",
+      "name": "Similarity",
+      "description": {
+        "content": "Semantic similarity and relatedness using Numberbatch embeddings",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "aeec682e-105d-4750-8d0e-aea0012b9522",
+          "name": "Find semantically related concepts",
+          "request": {
+            "name": "Find semantically related concepts",
+            "description": {
+              "content": "Returns a ranked list of concepts most semantically related to the given URI, using ConceptNet Numberbatch word vector similarity. Results are sorted by descending relatedness weight. This endpoint and /relatedness each count as 2 requests against the rate limit quota (3,600 req/hour, 120 req/min). The optional filter parameter restricts results to a particular language subtree.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "related",
+                ":uri"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of related concepts to return (0-100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Restrict results to URIs under this prefix (e.g. /c/en to limit to English concepts)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uri",
+                  "description": "(Required) ConceptNet URI path (e.g. c/en/dog — the leading slash is part of the base path, so omit it here)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9fffe1c0-b068-417d-86d1-72f8a1807cb7",
+              "name": "Ranked list of related concepts with weights",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "related",
+                    ":uri"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "/c/en"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uri",
+                      "description": "(Required) ConceptNet URI path (e.g. c/en/dog — the leading slash is part of the base path, so omit it here)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@id\": \"/related/c/en/dog\",\n  \"related\": [\n    {\n      \"@id\": \"/c/en/puppy\",\n      \"weight\": 0.713\n    },\n    {\n      \"@id\": \"/c/en/canine\",\n      \"weight\": 0.698\n    },\n    {\n      \"@id\": \"/c/en/pet\",\n      \"weight\": 0.621\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c355116-c6b2-44a7-8edb-eaacd4137cde",
+              "name": "URI not found in embedding space",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "related",
+                    ":uri"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "/c/en"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uri",
+                      "description": "(Required) ConceptNet URI path (e.g. c/en/dog — the leading slash is part of the base path, so omit it here)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "16458ca1-2a3e-4c86-831b-e8d8426a4eeb",
+          "name": "Compute pairwise relatedness score",
+          "request": {
+            "name": "Compute pairwise relatedness score",
+            "description": {
+              "content": "Returns a single floating-point relatedness score between 0 and 1 for any two ConceptNet concept URIs, computed from Numberbatch word vector cosine similarity. A score of 1.0 indicates maximum similarity and 0.0 indicates no detectable relationship. This endpoint and /related each count as 2 requests against the rate limit quota.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "relatedness"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "node1",
+                  "value": "<string>",
+                  "description": "(Required) First ConceptNet concept URI"
+                },
+                {
+                  "disabled": false,
+                  "key": "node2",
+                  "value": "<string>",
+                  "description": "(Required) Second ConceptNet concept URI"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b25e4102-5f42-46a1-a8bb-61cf6e72fd84",
+              "name": "Relatedness result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "relatedness"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "node1",
+                      "value": "/c/en/dog"
+                    },
+                    {
+                      "key": "node2",
+                      "value": "/c/en/cat"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@id\": \"/relatedness?node1=/c/en/dog&node2=/c/en/cat\",\n  \"value\": 0.849,\n  \"node1\": {\n    \"@id\": \"/c/en/dog\"\n  },\n  \"node2\": {\n    \"@id\": \"/c/en/cat\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24aa6a02-3c89-441f-b126-fada21771403",
+              "name": "Missing or invalid node parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "relatedness"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "node1",
+                      "value": "/c/en/dog"
+                    },
+                    {
+                      "key": "node2",
+                      "value": "/c/en/cat"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.conceptnet.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "13ea8c47-ec87-49c0-90ea-e8cad6a32231",
+    "name": "ConceptNet REST Concepts Similarity API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "ConceptNet is a freely available multilingual knowledge graph providing computers access to common-sense knowledge. The REST API exposes the full ConceptNet 5 knowledge graph via JSON-LD endpoints. Consumers can look up concept nodes by language and term, query edges by relation type, retrieve semantically related terms ranked by Numberbatch embedding similarity, compute pairwise relatedness scores between concepts, and normalize natural-language text into canonical ConceptNet URIs. No authentication or API key is required.\n\nContact Support:\n Name: ConceptNet Users Group",
+      "type": "text/plain"
+    }
+  }
+}

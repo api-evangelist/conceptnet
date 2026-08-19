@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ConceptNet REST Concepts Edges API",
+    "version": "5.7"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Edges",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Look up an individual edge (assertion)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.conceptnet.io/a/:edgeId",
+            "params": [
+              {
+                "name": "edgeId",
+                "value": "",
+                "type": "path",
+                "description": "Edge identifier path (URL-encoded brackets and slashes)"
+              }
+            ]
+          },
+          "docs": "Returns a JSON-LD edge object for the assertion identified by edgeId. Edge IDs are constructed from the start URI, relation URI, and end URI in the form /a/[/{rel}/,{start},/{end}/]. Each edge carries a weight, license, dataset, and source attribution."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

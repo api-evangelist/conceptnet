@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ConceptNet REST Concepts Sources API",
+    "version": "5.7"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Look up a data source",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.conceptnet.io/s/:sourcePath",
+            "params": [
+              {
+                "name": "sourcePath",
+                "value": "",
+                "type": "path",
+                "description": "Source path (e.g. resource/wordnet/3.1 or contributor/omcs/johndoe)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination (0-100000)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return (0-1000)"
+              }
+            ]
+          },
+          "docs": "Returns information about a ConceptNet data source such as Open Mind Common Sense, Wiktionary, WordNet, or a specific contributor. Source URIs take the form /s/resource/{dataset} or /s/contributor/omcs/{username}."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ConceptNet REST Concepts Relations API",
+    "version": "5.7"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Relations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Browse edges by relation type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.conceptnet.io/r/:relation",
+            "params": [
+              {
+                "name": "relation",
+                "value": "",
+                "type": "path",
+                "description": "ConceptNet relation name (e.g. IsA, UsedFor, RelatedTo)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination (0-100000)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return (0-1000)"
+              }
+            ]
+          },
+          "docs": "Returns a paginated JSON-LD list of all edges using the specified relation type. Valid relation names include IsA, UsedFor, CapableOf, AtLocation, Causes, HasProperty, PartOf, SimilarTo, Antonym, RelatedTo, DerivedFrom, Synonym, and many others defined in the ConceptNet relation vocabulary."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
