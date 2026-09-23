@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: ConceptNet REST Concepts Similarity API
-  description: ConceptNet is a freely available multilingual knowledge graph providing computers access to common-sense knowledge. The REST API exposes the full ConceptNet 5 knowledge graph via JSON-LD endpoints. Consumers can look up concept nodes by language and term, query edges by relation type, retrieve semantically related terms ranked by Numberbatch embedding similarity, compute pairwise relatedness scores between concepts, and normalize natural-language text into canonical ConceptNet URIs. No authentication or API key is required.
+  title: ConceptNet REST Similarity API
+  description: ConceptNet is a freely available multilingual knowledge graph providing computers access to common-sense knowledge.
   version: '5.7'
   license:
     name: CC BY-SA 4.0
@@ -115,6 +115,18 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    RelatedList:
+      type: object
+      description: Ranked list of semantically related concepts
+      properties:
+        '@id':
+          type: string
+          description: URI of this related-terms result
+          example: /related/c/en/dog
+        related:
+          type: array
+          items:
+            $ref: '#/components/schemas/WeightedConcept'
     RelatednessResult:
       type: object
       description: Pairwise semantic relatedness result
@@ -144,28 +156,6 @@ components:
           format: float
           description: Relatedness score (0.0-1.0)
           example: 0.713
-    RelatedList:
-      type: object
-      description: Ranked list of semantically related concepts
-      properties:
-        '@id':
-          type: string
-          description: URI of this related-terms result
-          example: /related/c/en/dog
-        related:
-          type: array
-          items:
-            $ref: '#/components/schemas/WeightedConcept'
-    Error:
-      type: object
-      description: API error response
-      properties:
-        error:
-          type: string
-          description: Error type identifier
-        details:
-          type: string
-          description: Human-readable error description
     ConceptRef:
       type: object
       description: Reference to a ConceptNet concept node
@@ -190,3 +180,13 @@ components:
           type: string
           description: Part-of-speech or sense label if applicable
           example: n
+    Error:
+      type: object
+      description: API error response
+      properties:
+        error:
+          type: string
+          description: Error type identifier
+        details:
+          type: string
+          description: Human-readable error description

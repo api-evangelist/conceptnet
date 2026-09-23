@@ -1,13 +1,7 @@
 {
   "provider": "conceptnet",
   "sources": [
-    "conceptnet-concepts-api-openapi.yml",
-    "conceptnet-edges-api-openapi.yml",
-    "conceptnet-query-api-openapi.yml",
-    "conceptnet-relations-api-openapi.yml",
-    "conceptnet-similarity-api-openapi.yml",
-    "conceptnet-sources-api-openapi.yml",
-    "conceptnet-utilities-api-openapi.yml"
+    "_original/openapi.yml"
   ],
   "outputs": [
     "conceptnet-concepts-api-openapi.yml",
@@ -21,6 +15,18 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "conceptnet-concepts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "conceptnet-edges-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "conceptnet-query-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "conceptnet-relations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "conceptnet-similarity-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "conceptnet-sources-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "conceptnet-utilities-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
