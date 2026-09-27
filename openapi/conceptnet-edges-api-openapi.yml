@@ -85,26 +85,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SourceRef'
-    SourceRef:
+    Error:
       type: object
-      description: Reference to a data source or contributor
+      description: API error response
       properties:
-        '@id':
+        error:
           type: string
-          description: Source URI
-          example: /s/resource/verbosity
-    RelationRef:
-      type: object
-      description: Reference to a ConceptNet relation type
-      properties:
-        '@id':
+          description: Error type identifier
+        details:
           type: string
-          description: Relation URI
-          example: /r/IsA
-        label:
-          type: string
-          description: Human-readable relation name
-          example: IsA
+          description: Human-readable error description
     ConceptRef:
       type: object
       description: Reference to a ConceptNet concept node
@@ -129,13 +119,23 @@ components:
           type: string
           description: Part-of-speech or sense label if applicable
           example: n
-    Error:
+    SourceRef:
       type: object
-      description: API error response
+      description: Reference to a data source or contributor
       properties:
-        error:
+        '@id':
           type: string
-          description: Error type identifier
-        details:
+          description: Source URI
+          example: /s/resource/verbosity
+    RelationRef:
+      type: object
+      description: Reference to a ConceptNet relation type
+      properties:
+        '@id':
           type: string
-          description: Human-readable error description
+          description: Relation URI
+          example: /r/IsA
+        label:
+          type: string
+          description: Human-readable relation name
+          example: IsA

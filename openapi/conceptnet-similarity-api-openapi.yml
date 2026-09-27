@@ -115,18 +115,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    RelatedList:
-      type: object
-      description: Ranked list of semantically related concepts
-      properties:
-        '@id':
-          type: string
-          description: URI of this related-terms result
-          example: /related/c/en/dog
-        related:
-          type: array
-          items:
-            $ref: '#/components/schemas/WeightedConcept'
     RelatednessResult:
       type: object
       description: Pairwise semantic relatedness result
@@ -143,19 +131,28 @@ components:
           $ref: '#/components/schemas/ConceptRef'
         node2:
           $ref: '#/components/schemas/ConceptRef'
-    WeightedConcept:
+    Error:
       type: object
-      description: A concept with a numeric relatedness weight
+      description: API error response
+      properties:
+        error:
+          type: string
+          description: Error type identifier
+        details:
+          type: string
+          description: Human-readable error description
+    RelatedList:
+      type: object
+      description: Ranked list of semantically related concepts
       properties:
         '@id':
           type: string
-          description: ConceptNet URI of the related concept
-          example: /c/en/puppy
-        weight:
-          type: number
-          format: float
-          description: Relatedness score (0.0-1.0)
-          example: 0.713
+          description: URI of this related-terms result
+          example: /related/c/en/dog
+        related:
+          type: array
+          items:
+            $ref: '#/components/schemas/WeightedConcept'
     ConceptRef:
       type: object
       description: Reference to a ConceptNet concept node
@@ -180,13 +177,16 @@ components:
           type: string
           description: Part-of-speech or sense label if applicable
           example: n
-    Error:
+    WeightedConcept:
       type: object
-      description: API error response
+      description: A concept with a numeric relatedness weight
       properties:
-        error:
+        '@id':
           type: string
-          description: Error type identifier
-        details:
-          type: string
-          description: Human-readable error description
+          description: ConceptNet URI of the related concept
+          example: /c/en/puppy
+        weight:
+          type: number
+          format: float
+          description: Relatedness score (0.0-1.0)
+          example: 0.713
