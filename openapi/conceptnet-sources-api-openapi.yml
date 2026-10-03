@@ -50,6 +50,78 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      description: API error response
+      properties:
+        error:
+          type: string
+          description: Error type identifier
+        details:
+          type: string
+          description: Human-readable error description
+    SourceNode:
+      type: object
+      description: JSON-LD node representing a ConceptNet data source
+      properties:
+        '@context':
+          type: array
+          items:
+            type: string
+        '@id':
+          type: string
+          description: Source URI
+          example: /s/resource/wordnet/3.1
+        edges:
+          type: array
+          items:
+            $ref: '#/components/schemas/Edge'
+        view:
+          $ref: '#/components/schemas/Pagination'
+    SourceRef:
+      type: object
+      description: Reference to a data source or contributor
+      properties:
+        '@id':
+          type: string
+          description: Source URI
+          example: /s/resource/verbosity
+    RelationRef:
+      type: object
+      description: Reference to a ConceptNet relation type
+      properties:
+        '@id':
+          type: string
+          description: Relation URI
+          example: /r/IsA
+        label:
+          type: string
+          description: Human-readable relation name
+          example: IsA
+    ConceptRef:
+      type: object
+      description: Reference to a ConceptNet concept node
+      properties:
+        '@id':
+          type: string
+          description: ConceptNet URI
+          example: /c/en/dog
+        label:
+          type: string
+          description: Human-readable label
+          example: dog
+        language:
+          type: string
+          description: BCP-47 language code
+          example: en
+        term:
+          type: string
+          description: Concept URI (same as @id)
+          example: /c/en/dog
+        sense_label:
+          type: string
+          description: Part-of-speech or sense label if applicable
+          example: n
     Edge:
       type: object
       description: A single ConceptNet assertion (knowledge edge)
@@ -87,58 +159,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SourceRef'
-    Error:
-      type: object
-      description: API error response
-      properties:
-        error:
-          type: string
-          description: Error type identifier
-        details:
-          type: string
-          description: Human-readable error description
-    ConceptRef:
-      type: object
-      description: Reference to a ConceptNet concept node
-      properties:
-        '@id':
-          type: string
-          description: ConceptNet URI
-          example: /c/en/dog
-        label:
-          type: string
-          description: Human-readable label
-          example: dog
-        language:
-          type: string
-          description: BCP-47 language code
-          example: en
-        term:
-          type: string
-          description: Concept URI (same as @id)
-          example: /c/en/dog
-        sense_label:
-          type: string
-          description: Part-of-speech or sense label if applicable
-          example: n
-    SourceNode:
-      type: object
-      description: JSON-LD node representing a ConceptNet data source
-      properties:
-        '@context':
-          type: array
-          items:
-            type: string
-        '@id':
-          type: string
-          description: Source URI
-          example: /s/resource/wordnet/3.1
-        edges:
-          type: array
-          items:
-            $ref: '#/components/schemas/Edge'
-        view:
-          $ref: '#/components/schemas/Pagination'
     Pagination:
       type: object
       description: Pagination metadata for list responses
@@ -163,26 +183,6 @@ components:
           type: string
           description: Human-readable summary of current result range
           example: Results 1-20 of 143
-    SourceRef:
-      type: object
-      description: Reference to a data source or contributor
-      properties:
-        '@id':
-          type: string
-          description: Source URI
-          example: /s/resource/verbosity
-    RelationRef:
-      type: object
-      description: Reference to a ConceptNet relation type
-      properties:
-        '@id':
-          type: string
-          description: Relation URI
-          example: /r/IsA
-        label:
-          type: string
-          description: Human-readable relation name
-          example: IsA
   parameters:
     offset:
       name: offset

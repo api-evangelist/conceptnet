@@ -64,6 +64,16 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      description: API error response
+      properties:
+        error:
+          type: string
+          description: Error type identifier
+        details:
+          type: string
+          description: Human-readable error description
     UriResult:
       type: object
       description: URI normalization result
@@ -75,13 +85,3 @@ components:
           type: string
           description: Canonical ConceptNet URI for the input text
           example: /c/en/french_toast
-    Error:
-      type: object
-      description: API error response
-      properties:
-        error:
-          type: string
-          description: Error type identifier
-        details:
-          type: string
-          description: Human-readable error description

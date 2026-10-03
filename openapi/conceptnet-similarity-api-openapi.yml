@@ -115,6 +115,16 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      description: API error response
+      properties:
+        error:
+          type: string
+          description: Error type identifier
+        details:
+          type: string
+          description: Human-readable error description
     RelatednessResult:
       type: object
       description: Pairwise semantic relatedness result
@@ -131,28 +141,6 @@ components:
           $ref: '#/components/schemas/ConceptRef'
         node2:
           $ref: '#/components/schemas/ConceptRef'
-    Error:
-      type: object
-      description: API error response
-      properties:
-        error:
-          type: string
-          description: Error type identifier
-        details:
-          type: string
-          description: Human-readable error description
-    RelatedList:
-      type: object
-      description: Ranked list of semantically related concepts
-      properties:
-        '@id':
-          type: string
-          description: URI of this related-terms result
-          example: /related/c/en/dog
-        related:
-          type: array
-          items:
-            $ref: '#/components/schemas/WeightedConcept'
     ConceptRef:
       type: object
       description: Reference to a ConceptNet concept node
@@ -177,6 +165,18 @@ components:
           type: string
           description: Part-of-speech or sense label if applicable
           example: n
+    RelatedList:
+      type: object
+      description: Ranked list of semantically related concepts
+      properties:
+        '@id':
+          type: string
+          description: URI of this related-terms result
+          example: /related/c/en/dog
+        related:
+          type: array
+          items:
+            $ref: '#/components/schemas/WeightedConcept'
     WeightedConcept:
       type: object
       description: A concept with a numeric relatedness weight

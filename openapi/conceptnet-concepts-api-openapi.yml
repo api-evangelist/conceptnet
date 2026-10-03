@@ -112,6 +112,36 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      description: API error response
+      properties:
+        error:
+          type: string
+          description: Error type identifier
+        details:
+          type: string
+          description: Human-readable error description
+    SourceRef:
+      type: object
+      description: Reference to a data source or contributor
+      properties:
+        '@id':
+          type: string
+          description: Source URI
+          example: /s/resource/verbosity
+    RelationRef:
+      type: object
+      description: Reference to a ConceptNet relation type
+      properties:
+        '@id':
+          type: string
+          description: Relation URI
+          example: /r/IsA
+        label:
+          type: string
+          description: Human-readable relation name
+          example: IsA
     Edge:
       type: object
       description: A single ConceptNet assertion (knowledge edge)
@@ -149,16 +179,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SourceRef'
-    Error:
-      type: object
-      description: API error response
-      properties:
-        error:
-          type: string
-          description: Error type identifier
-        details:
-          type: string
-          description: Human-readable error description
     ConceptRef:
       type: object
       description: Reference to a ConceptNet concept node
@@ -183,6 +203,28 @@ components:
           type: string
           description: Part-of-speech or sense label if applicable
           example: n
+    ConceptNode:
+      type: object
+      description: JSON-LD node object representing a ConceptNet concept
+      properties:
+        '@context':
+          type: array
+          items:
+            type: string
+          description: JSON-LD context URLs
+          example:
+          - http://api.conceptnet.io/ld/conceptnet5.7/context.ld.json
+        '@id':
+          type: string
+          description: ConceptNet URI of the concept
+          example: /c/en/dog
+        edges:
+          type: array
+          items:
+            $ref: '#/components/schemas/Edge'
+          description: List of assertions connecting this concept to others
+        view:
+          $ref: '#/components/schemas/Pagination'
     Pagination:
       type: object
       description: Pagination metadata for list responses
@@ -207,48 +249,6 @@ components:
           type: string
           description: Human-readable summary of current result range
           example: Results 1-20 of 143
-    SourceRef:
-      type: object
-      description: Reference to a data source or contributor
-      properties:
-        '@id':
-          type: string
-          description: Source URI
-          example: /s/resource/verbosity
-    ConceptNode:
-      type: object
-      description: JSON-LD node object representing a ConceptNet concept
-      properties:
-        '@context':
-          type: array
-          items:
-            type: string
-          description: JSON-LD context URLs
-          example:
-          - http://api.conceptnet.io/ld/conceptnet5.7/context.ld.json
-        '@id':
-          type: string
-          description: ConceptNet URI of the concept
-          example: /c/en/dog
-        edges:
-          type: array
-          items:
-            $ref: '#/components/schemas/Edge'
-          description: List of assertions connecting this concept to others
-        view:
-          $ref: '#/components/schemas/Pagination'
-    RelationRef:
-      type: object
-      description: Reference to a ConceptNet relation type
-      properties:
-        '@id':
-          type: string
-          description: Relation URI
-          example: /r/IsA
-        label:
-          type: string
-          description: Human-readable relation name
-          example: IsA
   parameters:
     language:
       name: language
@@ -268,14 +268,6 @@ components:
         minimum: 0
         maximum: 100000
         default: 0
-    term:
-      name: term
-      in: path
-      description: Concept term in the given language, with spaces replaced by underscores (e.g. french_toast, dog, run_away)
-      required: true
-      schema:
-        type: string
-        example: dog
     limit:
       name: limit
       in: query
@@ -286,3 +278,11 @@ components:
         minimum: 0
         maximum: 1000
         default: 20
+    term:
+      name: term
+      in: path
+      description: Concept term in the given language, with spaces replaced by underscores (e.g. french_toast, dog, run_away)
+      required: true
+      schema:
+        type: string
+        example: dog
