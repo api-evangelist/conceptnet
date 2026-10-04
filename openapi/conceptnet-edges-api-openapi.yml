@@ -48,6 +48,14 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    SourceRef:
+      type: object
+      description: Reference to a data source or contributor
+      properties:
+        '@id':
+          type: string
+          description: Source URI
+          example: /s/resource/verbosity
     Error:
       type: object
       description: API error response
@@ -58,14 +66,30 @@ components:
         details:
           type: string
           description: Human-readable error description
-    SourceRef:
+    ConceptRef:
       type: object
-      description: Reference to a data source or contributor
+      description: Reference to a ConceptNet concept node
       properties:
         '@id':
           type: string
-          description: Source URI
-          example: /s/resource/verbosity
+          description: ConceptNet URI
+          example: /c/en/dog
+        label:
+          type: string
+          description: Human-readable label
+          example: dog
+        language:
+          type: string
+          description: BCP-47 language code
+          example: en
+        term:
+          type: string
+          description: Concept URI (same as @id)
+          example: /c/en/dog
+        sense_label:
+          type: string
+          description: Part-of-speech or sense label if applicable
+          example: n
     RelationRef:
       type: object
       description: Reference to a ConceptNet relation type
@@ -115,27 +139,3 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SourceRef'
-    ConceptRef:
-      type: object
-      description: Reference to a ConceptNet concept node
-      properties:
-        '@id':
-          type: string
-          description: ConceptNet URI
-          example: /c/en/dog
-        label:
-          type: string
-          description: Human-readable label
-          example: dog
-        language:
-          type: string
-          description: BCP-47 language code
-          example: en
-        term:
-          type: string
-          description: Concept URI (same as @id)
-          example: /c/en/dog
-        sense_label:
-          type: string
-          description: Part-of-speech or sense label if applicable
-          example: n

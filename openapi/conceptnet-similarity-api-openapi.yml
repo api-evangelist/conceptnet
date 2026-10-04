@@ -115,16 +115,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Error:
-      type: object
-      description: API error response
-      properties:
-        error:
-          type: string
-          description: Error type identifier
-        details:
-          type: string
-          description: Human-readable error description
     RelatednessResult:
       type: object
       description: Pairwise semantic relatedness result
@@ -141,30 +131,6 @@ components:
           $ref: '#/components/schemas/ConceptRef'
         node2:
           $ref: '#/components/schemas/ConceptRef'
-    ConceptRef:
-      type: object
-      description: Reference to a ConceptNet concept node
-      properties:
-        '@id':
-          type: string
-          description: ConceptNet URI
-          example: /c/en/dog
-        label:
-          type: string
-          description: Human-readable label
-          example: dog
-        language:
-          type: string
-          description: BCP-47 language code
-          example: en
-        term:
-          type: string
-          description: Concept URI (same as @id)
-          example: /c/en/dog
-        sense_label:
-          type: string
-          description: Part-of-speech or sense label if applicable
-          example: n
     RelatedList:
       type: object
       description: Ranked list of semantically related concepts
@@ -190,3 +156,37 @@ components:
           format: float
           description: Relatedness score (0.0-1.0)
           example: 0.713
+    Error:
+      type: object
+      description: API error response
+      properties:
+        error:
+          type: string
+          description: Error type identifier
+        details:
+          type: string
+          description: Human-readable error description
+    ConceptRef:
+      type: object
+      description: Reference to a ConceptNet concept node
+      properties:
+        '@id':
+          type: string
+          description: ConceptNet URI
+          example: /c/en/dog
+        label:
+          type: string
+          description: Human-readable label
+          example: dog
+        language:
+          type: string
+          description: BCP-47 language code
+          example: en
+        term:
+          type: string
+          description: Concept URI (same as @id)
+          example: /c/en/dog
+        sense_label:
+          type: string
+          description: Part-of-speech or sense label if applicable
+          example: n

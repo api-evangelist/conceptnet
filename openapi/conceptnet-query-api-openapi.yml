@@ -83,7 +83,101 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return (0-1000)
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 1000
+        default: 20
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination (0-100000)
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 100000
+        default: 0
   schemas:
+    SourceRef:
+      type: object
+      description: Reference to a data source or contributor
+      properties:
+        '@id':
+          type: string
+          description: Source URI
+          example: /s/resource/verbosity
+    EdgeList:
+      type: object
+      description: Paginated list of edges
+      properties:
+        '@context':
+          type: array
+          items:
+            type: string
+        '@id':
+          type: string
+          description: URI of this query result
+        edges:
+          type: array
+          items:
+            $ref: '#/components/schemas/Edge'
+        view:
+          $ref: '#/components/schemas/Pagination'
+    Pagination:
+      type: object
+      description: Pagination metadata for list responses
+      properties:
+        '@id':
+          type: string
+          description: URI of the current page
+        paginatedProperty:
+          type: string
+          description: Property name that contains the paginated items
+          example: edges
+        firstPage:
+          type: string
+          description: URI of the first page
+        nextPage:
+          type: string
+          description: URI of the next page (absent on last page)
+        previousPage:
+          type: string
+          description: URI of the previous page (absent on first page)
+        comment:
+          type: string
+          description: Human-readable summary of current result range
+          example: Results 1-20 of 143
+    ConceptRef:
+      type: object
+      description: Reference to a ConceptNet concept node
+      properties:
+        '@id':
+          type: string
+          description: ConceptNet URI
+          example: /c/en/dog
+        label:
+          type: string
+          description: Human-readable label
+          example: dog
+        language:
+          type: string
+          description: BCP-47 language code
+          example: en
+        term:
+          type: string
+          description: Concept URI (same as @id)
+          example: /c/en/dog
+        sense_label:
+          type: string
+          description: Part-of-speech or sense label if applicable
+          example: n
     Error:
       type: object
       description: API error response
@@ -94,14 +188,6 @@ components:
         details:
           type: string
           description: Human-readable error description
-    SourceRef:
-      type: object
-      description: Reference to a data source or contributor
-      properties:
-        '@id':
-          type: string
-          description: Source URI
-          example: /s/resource/verbosity
     RelationRef:
       type: object
       description: Reference to a ConceptNet relation type
@@ -151,89 +237,3 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SourceRef'
-    EdgeList:
-      type: object
-      description: Paginated list of edges
-      properties:
-        '@context':
-          type: array
-          items:
-            type: string
-        '@id':
-          type: string
-          description: URI of this query result
-        edges:
-          type: array
-          items:
-            $ref: '#/components/schemas/Edge'
-        view:
-          $ref: '#/components/schemas/Pagination'
-    ConceptRef:
-      type: object
-      description: Reference to a ConceptNet concept node
-      properties:
-        '@id':
-          type: string
-          description: ConceptNet URI
-          example: /c/en/dog
-        label:
-          type: string
-          description: Human-readable label
-          example: dog
-        language:
-          type: string
-          description: BCP-47 language code
-          example: en
-        term:
-          type: string
-          description: Concept URI (same as @id)
-          example: /c/en/dog
-        sense_label:
-          type: string
-          description: Part-of-speech or sense label if applicable
-          example: n
-    Pagination:
-      type: object
-      description: Pagination metadata for list responses
-      properties:
-        '@id':
-          type: string
-          description: URI of the current page
-        paginatedProperty:
-          type: string
-          description: Property name that contains the paginated items
-          example: edges
-        firstPage:
-          type: string
-          description: URI of the first page
-        nextPage:
-          type: string
-          description: URI of the next page (absent on last page)
-        previousPage:
-          type: string
-          description: URI of the previous page (absent on first page)
-        comment:
-          type: string
-          description: Human-readable summary of current result range
-          example: Results 1-20 of 143
-  parameters:
-    offset:
-      name: offset
-      in: query
-      description: Number of results to skip for pagination (0-100000)
-      required: false
-      schema:
-        type: integer
-        minimum: 0
-        maximum: 100000
-        default: 0
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of results to return (0-1000)
-      required: false
-      schema:
-        type: integer
-        minimum: 0
-        maximum: 1000
-        default: 20
