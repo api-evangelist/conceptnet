@@ -1,3 +1,7 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
 aid: conceptnet
 name: ConceptNet Plans & Pricing
 description: >-
@@ -36,3 +40,26 @@ plans:
       - Local Python API (AssertionFinder)
       - Custom builds possible
       - Requires significant hardware resources
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - metered
+  units:
+  - request
+  plans:
+  - name: Free Public API
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - request
+    periods: []
+  - name: Self-Hosted
+    access: other
+    model: free
+    model_how: derived
+    units:
+    - other
+    periods: []
