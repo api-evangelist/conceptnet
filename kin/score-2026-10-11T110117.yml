@@ -1,25 +1,23 @@
-# Kin Score artifact — conceptnet — 2026-09-10T204815
+# Kin Score artifact — conceptnet — 2026-10-11T110117
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: conceptnet
-  schema_version: 0.20.0
-  scored_at: '2026-09-10'
-  run_ts: 2026-09-10T204815
-  composite: 36.1
+  schema_version: 0.23.0
+  scored_at: '2026-10-11'
+  run_ts: 2026-10-11T110117
+  composite: 34.1
   band: thin
   facets:
-    discoverability: 75.9
-    contract_quality: 53.7
-    governance: 9.8
-    operational_transparency: 34.2
-    developer_ergonomics: 26.2
-    commercial_clarity: 28.9
+    discoverability: 73.2
+    contract_quality: 48.4
     contract_governance: 9.8
-    access_clarity: 28.9
+    operational_transparency: 31.1
+    developer_ergonomics: 26.2
+    access_clarity: 26.8
   agent_readiness:
-    score: 29.6
-    band: agent-ready
+    score: 27.4
+    band: agent-aware
     dimensions:
       spec_presence: true
       agentic_access: derived
@@ -29,7 +27,7 @@ kin_score:
       idempotency: na
       error_semantics: verified
       openapi_examples: partial
-      rate_limit_signal: documented
+      rate_limit_signal: derived
       event_surface_described: false
       agent_skills: false
       well_known_catalog: false
@@ -44,7 +42,7 @@ kin_score:
     applies: true
     regime: Government & Public Sector
     regime_id: government
-    score: 11.1
+    score: 5.5
     matched_via: tags
   provenance:
     agentic_access: derived
