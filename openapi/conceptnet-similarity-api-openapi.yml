@@ -115,47 +115,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    RelatednessResult:
-      type: object
-      description: Pairwise semantic relatedness result
-      properties:
-        '@id':
-          type: string
-          description: URI of this relatedness result
-        value:
-          type: number
-          format: float
-          description: Relatedness score between 0.0 and 1.0
-          example: 0.849
-        node1:
-          $ref: '#/components/schemas/ConceptRef'
-        node2:
-          $ref: '#/components/schemas/ConceptRef'
-    RelatedList:
-      type: object
-      description: Ranked list of semantically related concepts
-      properties:
-        '@id':
-          type: string
-          description: URI of this related-terms result
-          example: /related/c/en/dog
-        related:
-          type: array
-          items:
-            $ref: '#/components/schemas/WeightedConcept'
-    WeightedConcept:
-      type: object
-      description: A concept with a numeric relatedness weight
-      properties:
-        '@id':
-          type: string
-          description: ConceptNet URI of the related concept
-          example: /c/en/puppy
-        weight:
-          type: number
-          format: float
-          description: Relatedness score (0.0-1.0)
-          example: 0.713
     Error:
       type: object
       description: API error response
@@ -190,3 +149,44 @@ components:
           type: string
           description: Part-of-speech or sense label if applicable
           example: n
+    WeightedConcept:
+      type: object
+      description: A concept with a numeric relatedness weight
+      properties:
+        '@id':
+          type: string
+          description: ConceptNet URI of the related concept
+          example: /c/en/puppy
+        weight:
+          type: number
+          format: float
+          description: Relatedness score (0.0-1.0)
+          example: 0.713
+    RelatednessResult:
+      type: object
+      description: Pairwise semantic relatedness result
+      properties:
+        '@id':
+          type: string
+          description: URI of this relatedness result
+        value:
+          type: number
+          format: float
+          description: Relatedness score between 0.0 and 1.0
+          example: 0.849
+        node1:
+          $ref: '#/components/schemas/ConceptRef'
+        node2:
+          $ref: '#/components/schemas/ConceptRef'
+    RelatedList:
+      type: object
+      description: Ranked list of semantically related concepts
+      properties:
+        '@id':
+          type: string
+          description: URI of this related-terms result
+          example: /related/c/en/dog
+        related:
+          type: array
+          items:
+            $ref: '#/components/schemas/WeightedConcept'

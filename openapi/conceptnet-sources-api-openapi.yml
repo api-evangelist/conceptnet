@@ -50,32 +50,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    SourceNode:
-      type: object
-      description: JSON-LD node representing a ConceptNet data source
-      properties:
-        '@context':
-          type: array
-          items:
-            type: string
-        '@id':
-          type: string
-          description: Source URI
-          example: /s/resource/wordnet/3.1
-        edges:
-          type: array
-          items:
-            $ref: '#/components/schemas/Edge'
-        view:
-          $ref: '#/components/schemas/Pagination'
-    SourceRef:
-      type: object
-      description: Reference to a data source or contributor
-      properties:
-        '@id':
-          type: string
-          description: Source URI
-          example: /s/resource/verbosity
     Error:
       type: object
       description: API error response
@@ -86,30 +60,6 @@ components:
         details:
           type: string
           description: Human-readable error description
-    Pagination:
-      type: object
-      description: Pagination metadata for list responses
-      properties:
-        '@id':
-          type: string
-          description: URI of the current page
-        paginatedProperty:
-          type: string
-          description: Property name that contains the paginated items
-          example: edges
-        firstPage:
-          type: string
-          description: URI of the first page
-        nextPage:
-          type: string
-          description: URI of the next page (absent on last page)
-        previousPage:
-          type: string
-          description: URI of the previous page (absent on first page)
-        comment:
-          type: string
-          description: Human-readable summary of current result range
-          example: Results 1-20 of 143
     ConceptRef:
       type: object
       description: Reference to a ConceptNet concept node
@@ -134,18 +84,48 @@ components:
           type: string
           description: Part-of-speech or sense label if applicable
           example: n
-    RelationRef:
+    Pagination:
       type: object
-      description: Reference to a ConceptNet relation type
+      description: Pagination metadata for list responses
       properties:
         '@id':
           type: string
-          description: Relation URI
-          example: /r/IsA
-        label:
+          description: URI of the current page
+        paginatedProperty:
           type: string
-          description: Human-readable relation name
-          example: IsA
+          description: Property name that contains the paginated items
+          example: edges
+        firstPage:
+          type: string
+          description: URI of the first page
+        nextPage:
+          type: string
+          description: URI of the next page (absent on last page)
+        previousPage:
+          type: string
+          description: URI of the previous page (absent on first page)
+        comment:
+          type: string
+          description: Human-readable summary of current result range
+          example: Results 1-20 of 143
+    SourceNode:
+      type: object
+      description: JSON-LD node representing a ConceptNet data source
+      properties:
+        '@context':
+          type: array
+          items:
+            type: string
+        '@id':
+          type: string
+          description: Source URI
+          example: /s/resource/wordnet/3.1
+        edges:
+          type: array
+          items:
+            $ref: '#/components/schemas/Edge'
+        view:
+          $ref: '#/components/schemas/Pagination'
     Edge:
       type: object
       description: A single ConceptNet assertion (knowledge edge)
@@ -183,17 +163,27 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SourceRef'
+    RelationRef:
+      type: object
+      description: Reference to a ConceptNet relation type
+      properties:
+        '@id':
+          type: string
+          description: Relation URI
+          example: /r/IsA
+        label:
+          type: string
+          description: Human-readable relation name
+          example: IsA
+    SourceRef:
+      type: object
+      description: Reference to a data source or contributor
+      properties:
+        '@id':
+          type: string
+          description: Source URI
+          example: /s/resource/verbosity
   parameters:
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of results to return (0-1000)
-      required: false
-      schema:
-        type: integer
-        minimum: 0
-        maximum: 1000
-        default: 20
     offset:
       name: offset
       in: query
@@ -204,3 +194,13 @@ components:
         minimum: 0
         maximum: 100000
         default: 0
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return (0-1000)
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 1000
+        default: 20
