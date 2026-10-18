@@ -47,6 +47,15 @@ x-source: manual
 x-category: Knowledge Graphs
 tags:
   - Knowledge Graph
+  - Natural Language Processing
+  - Semantic Web
+  - Common Sense
+  - Multilingual
+  - Word Embeddings
+  - Linked Data
+  - Open Data
+tags_raw:
+  - Knowledge Graph
   - NLP
   - Semantic Web
   - Common Sense
@@ -66,6 +75,12 @@ apis:
   humanURL: https://github.com/commonsense/conceptnet5/wiki/API
   baseURL: https://api.conceptnet.io
   tags:
+  - Knowledge Graph
+  - Natural Language Processing
+  - Semantic Relations
+  - Multilingual
+  - Common Sense
+  tags_raw:
   - Knowledge Graph
   - NLP
   - Semantic Relations
