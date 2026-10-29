@@ -64,36 +64,154 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-ConceptNet is a freely available multilingual knowledge graph that gives computers access to common-sense knowledge. It represents over 13 million links between concepts across 100+ languages, drawing from crowd-sourced resources (Open Mind Common Sense, Wiktionary), expert-created resources (WordNet, JMDict), and games with a purpose (Verbosity, nadya.jp).
+ConceptNet is a freely available multilingual knowledge graph that gives computers access to common-sense knowledge. It represents over 13 million links between concepts across 100+ languages, drawing from crowd-sourced resources (Open Mind Common Sense, Wiktionary), expert-created resources (WordNet, JMDict), and games with a purpose (Verbosity, nadya.jp). The public REST API provides JSON-LD responses and receives over 50,000 daily hits. ConceptNet also powers Numberbatch, a set of multilingual word embeddings aligned across languages that outperform word2vec, GloVe, and fastText on standard benchmarks.
 
-The public REST API at `api.conceptnet.io` provides JSON-LD responses, requires no authentication, and receives over 50,000 daily hits. ConceptNet also powers Numberbatch, a set of multilingual word embeddings that outperform word2vec, GloVe, and fastText on standard benchmarks.
+**Areas:** Knowledge Graph · Natural Language Processing · Semantic Web · Common Sense · Multilingual · Word Embeddings · Linked Data · Open Data
 
-- **Website:** https://conceptnet.io
-- **API Base URL:** https://api.conceptnet.io
-- **API Documentation:** https://github.com/commonsense/conceptnet5/wiki/API
-- **GitHub:** https://github.com/commonsense/conceptnet5
-- **License:** CC BY-SA 4.0
+## ConceptNet on APIs.io
 
-## Key Endpoints
+Everything profiled for ConceptNet is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/conceptnet/](https://apis.io/providers/conceptnet/)** — or go straight to one of the APIs or properties below.
 
-| Endpoint | Description |
+### APIs (8)
+
+- [ConceptNet REST API](https://apis.io/apis/conceptnet/conceptnet-rest-api/) — The ConceptNet REST API exposes the full ConceptNet 5 knowledge graph via JSON-LD endpoints. Consumers can look up concept nodes by language and term, query…
+- [ConceptNet Concepts API](https://apis.io/apis/conceptnet/conceptnet-concepts-api/) — Look up concept nodes in the knowledge graph
+- [ConceptNet Edges API](https://apis.io/apis/conceptnet/conceptnet-edges-api/) — Access individual edge (assertion) records
+- [ConceptNet Query API](https://apis.io/apis/conceptnet/conceptnet-query-api/) — Complex multi-parameter edge queries
+- [ConceptNet Relations API](https://apis.io/apis/conceptnet/conceptnet-relations-api/) — Browse edges grouped by relation type
+- [ConceptNet Similarity API](https://apis.io/apis/conceptnet/conceptnet-similarity-api/) — Semantic similarity and relatedness using Numberbatch embeddings
+- [ConceptNet Sources API](https://apis.io/apis/conceptnet/conceptnet-sources-api/) — Access provenance and source information
+- [ConceptNet Utilities API](https://apis.io/apis/conceptnet/conceptnet-utilities-api/) — URI normalization and text standardization
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Conceptnet Agentic Access](https://apis.io/agentic-access/conceptnet/conceptnet-agentic-access/)
+
+#### JSON Schema (3)
+
+The data models the API reads and writes.
+
+- [ConceptNet Concept Node](https://apis.io/schemas/conceptnet/concept-node/)
+- [ConceptNet Edge](https://apis.io/schemas/conceptnet/edge/)
+- [ConceptNet Relatedness Result](https://apis.io/schemas/conceptnet/relatedness/)
+
+#### Examples (5)
+
+Example requests and responses.
+
+- [Get Concept Node](https://apis.io/examples/conceptnet/get-concept-node/)
+- [Get Related Concepts](https://apis.io/examples/conceptnet/get-related-concepts/)
+- [Get Relatedness](https://apis.io/examples/conceptnet/get-relatedness/)
+- [Normalize Uri](https://apis.io/examples/conceptnet/normalize-uri/)
+- [Query Edges](https://apis.io/examples/conceptnet/query-edges/)
+
+#### Collections (7)
+
+Postman and Open Collection request collections.
+
+- [ConceptNet REST Concepts API](https://apis.io/collections/conceptnet/open-conceptnet-concepts-api/)
+- [ConceptNet REST Concepts Edges API](https://apis.io/collections/conceptnet/open-conceptnet-edges-api/)
+- [ConceptNet REST Concepts Query API](https://apis.io/collections/conceptnet/open-conceptnet-query-api/)
+- [ConceptNet REST Concepts Relations API](https://apis.io/collections/conceptnet/open-conceptnet-relations-api/)
+- [ConceptNet REST Concepts Similarity API](https://apis.io/collections/conceptnet/open-conceptnet-similarity-api/)
+- [ConceptNet REST Concepts Sources API](https://apis.io/collections/conceptnet/open-conceptnet-sources-api/)
+- [ConceptNet REST Concepts Utilities API](https://apis.io/collections/conceptnet/open-conceptnet-utilities-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [ConceptNet — jsonschema rules](https://apis.io/rules/conceptnet/conceptnet-jsonschema-spectral-rules/)
+
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Conceptnet Domain Security](https://apis.io/security/conceptnet/conceptnet-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Conceptnet Plans Pricing](https://apis.io/plans/conceptnet/conceptnet-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Conceptnet Rate Limits](https://apis.io/rate-limits/conceptnet/conceptnet-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Conceptnet Finops](https://apis.io/finops/conceptnet/conceptnet-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://conceptnet.io)
+- [Documentation](https://github.com/commonsense/conceptnet5/wiki/API)
+- [Getting started](https://github.com/commonsense/conceptnet5/wiki)
+- [Support](https://groups.google.com/g/conceptnet-users)
+- [GitHub](https://github.com/commonsense)
+
+## API Evangelist rating
+
+**Kin Score 27.2** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
 |---|---|
-| `GET /c/{language}/{term}` | Look up all edges for a concept node |
-| `GET /query` | Query edges by relation, start, end, or source |
-| `GET /related/c/{language}/{term}` | Get semantically related terms (Numberbatch) |
-| `GET /relatedness?node1=…&node2=…` | Score pairwise semantic similarity (0–1) |
-| `GET /uri?language=…&text=…` | Normalize text to a canonical ConceptNet URI |
+| Discoverability | 73.2 |
+| Contract quality | 48.4 |
+| Contract governance | 9.8 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 26.2 |
+| Access clarity | 5.3 |
 
-## Rate Limits
+**Agent readiness 27.4** — agent-aware
 
-- 3,600 requests per hour
-- 120 requests per minute (burst)
-- `/related` and `/relatedness` count as 2 requests each
-- No API key required
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | na |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
 
-## Files
+**Regulatory alignment 5.9** — Government & Public Sector
 
-- `apis.yml` — APIs.json 0.19 provider profile
-- `plans/conceptnet-plans-pricing.yml` — Pricing tiers (free / self-hosted)
-- `rate-limits/conceptnet-rate-limits.yml` — Rate limit details
-- `finops/conceptnet-finops.yml` — Cost optimization strategies
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/conceptnet/](https://apis.io/providers/conceptnet/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for ConceptNet: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/conceptnet/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
